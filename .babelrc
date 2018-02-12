@@ -1,0 +1,14 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false
+    }],
+    "flow",
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    "styled-components",
+    "external-helpers"
+  ]
+}

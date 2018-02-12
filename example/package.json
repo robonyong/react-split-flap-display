@@ -1,0 +1,21 @@
+{
+  "name": "react-split-flap-display-example",
+  "homepage": "https://robonyong.github.io/react-split-flap-display",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "react": "16.2.0",
+    "react-color": "2.13.8",
+    "react-dom": "16.2.0",
+    "react-scripts": "1.1.0",
+    "react-split-flap-display": "^0.0.1",
+    "styled-components": "3.1.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
