@@ -1,6 +1,6 @@
-# react-split-flap-display
+# React Split Flap Display
 
-A React component that mimics a Split-Flap/Solari display, cos I like Solari boards.
+A React component that mimics a Split-Flap/Solari display, cos I like Solari boards & wanted to practice creating NPM modules.
 
 [![NPM](https://img.shields.io/npm/v/react-split-flap-display.svg)](https://www.npmjs.com/package/react-split-flap-display)
 
