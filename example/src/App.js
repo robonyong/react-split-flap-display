@@ -94,6 +94,11 @@ export default class App extends Component {
             </Wrapper>
             <Wrapper>
               <div>
+                <label>
+                  display:&nbsp;<input value={this.state.value} onChange={this.onDisplayInput} />
+                </label>
+              </div>
+              <div>
                 character set:&nbsp;
                 <select value={this.state.exampleSet} onChange={this.onSelect}>
                   <option value="numeric">0-9</option>
@@ -101,11 +106,6 @@ export default class App extends Component {
                   <option value="alphanumeric">A-Z with 0-9</option>
                   <option value="punctuation">A-Z with punctuation</option>
                 </select>
-              </div>
-              <div>
-                <label>
-                  display:&nbsp;<input value={this.state.value} onChange={this.onDisplayInput} />
-                </label>
               </div>
               <div>
                 <label>

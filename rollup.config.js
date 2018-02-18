@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import eslint from 'rollup-plugin-eslint';
+import flow from 'rollup-plugin-flow';
 import postcss from 'rollup-plugin-postcss';
 import minify from 'rollup-plugin-babel-minify';
 import resolve from 'rollup-plugin-node-resolve';
@@ -27,11 +28,12 @@ export default {
     postcss({
       modules: true,
     }),
+    flow(),
     babel({
       exclude: 'node_modules/**',
     }),
     resolve(),
     commonjs(),
-    (process.env.NODE_ENV === 'production' && minify()),
+    process.env.NODE_ENV === 'production' && minify(),
   ],
 };
