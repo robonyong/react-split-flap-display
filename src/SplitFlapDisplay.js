@@ -15,6 +15,7 @@ type Props = {
   borderColor: string,
   borderWidth: string,
   characterSet: Array<string>,
+  characterWidth?: string,
   fontSize: string,
   minLength?: number,
   padDirection: string,
@@ -157,6 +158,7 @@ export default class SplitFlapDisplay extends React.Component<Props, State> {
       background,
       borderColor,
       borderWidth,
+      characterWidth,
       fontSize,
       padDirection,
       step,
@@ -188,6 +190,7 @@ export default class SplitFlapDisplay extends React.Component<Props, State> {
             key={`split-flap-${idx}`}
             background={background}
             borderWidth={borderWidth}
+            characterWidth={characterWidth}
             prevValue={v === ' ' ? '\u2007' : v}
             step={step}
             textColor={textColor}

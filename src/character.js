@@ -7,6 +7,7 @@ import Panel, { FlipPanel } from './Panel';
 type Props = {
   background: string,
   borderWidth: string,
+  characterWidth: ?string,
   prevValue: string,
   step: number,
   textColor: string,
@@ -17,6 +18,9 @@ type Props = {
 const Character = styled.div`
   background: ${({ background }: { background: string }): string => background};
   display: flex;
+  justify-content: center;
+  width: ${({ characterWidth }: { characterWidth: ?string }): string =>
+    characterWidth || 'initial'};
   padding: 0.5em;
   position: relative;
   &:after {
@@ -40,12 +44,13 @@ const Character = styled.div`
 export default ({
   background,
   borderWidth,
+  characterWidth,
   prevValue,
   step,
   textColor,
   value,
 }: Props): React.Element<*> => (
-  <Character background={background} borderWidth={borderWidth}>
+  <Character background={background} borderWidth={borderWidth} characterWidth={characterWidth}>
     <Panel position="top" background={background} textColor={textColor} value={value} />
     <Panel position="bottom" background={background} textColor={textColor} value={prevValue} />
     {prevValue !== value && (

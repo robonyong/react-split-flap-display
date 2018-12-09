@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
 
 export default ({
   background,
   borderColor,
   borderWidth,
   characterSet,
+  characterWidth,
   fontSize,
   step,
   textColor,
-  value
+  value,
 }) => (
   <pre>
     {`
@@ -17,6 +18,7 @@ export default ({
     borderColor='${borderColor}'
     borderWidth='${borderWidth}'
     characterSet={${characterSet}}
+    characterWidth='${characterWidth}'
     fontSize='${fontSize}'
     step={${step}}
     textColor='${textColor}'
