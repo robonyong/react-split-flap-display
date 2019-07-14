@@ -18,7 +18,7 @@
     "setup-example": "npm link && cd example && npm link react-split-flap-display",
     "precommit": "lint-staged",
     "prepare": "NODE_ENV=production npm run build",
-    "predeploy": "cd example && npm install && npm run build",
+    "predeploy": "cd example && npm run build",
     "deploy": "gh-pages -d example/build"
   },
   "lint-staged": {
@@ -52,8 +52,8 @@
     "lint-staged": "6.1.1",
     "prettier": "1.10.2",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "react-scripts": "2.1.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.1",
     "rollup": "0.54.0",
     "rollup-plugin-babel": "3.0.3",
     "rollup-plugin-babel-minify": "4.0.0",
@@ -61,7 +61,7 @@
     "rollup-plugin-eslint": "4.0.0",
     "rollup-plugin-flow": "1.1.1",
     "rollup-plugin-node-resolve": "3.0.2",
-    "rollup-plugin-postcss": "1.6.3",
+    "rollup-plugin-postcss": "2.0.3",
     "styled-components": "3.1.6"
   },
   "files": ["dist"]
