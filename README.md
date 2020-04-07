@@ -52,8 +52,8 @@ class Display extends Component {
 
 For `characterSet`, there are three convenience constants that ship with this component:
 
-`SplitFlapDisplay.NUMERIC`: [0-9]
-`SplitFlapDisplay.ALPHA`: whitespace ' ' + [A-Z]
+`SplitFlapDisplay.NUMERIC`: `[0-9]`\
+`SplitFlapDisplay.ALPHA`: whitespace `' '` + `[A-Z]`\
 `SplitFlapDisplay.PUNCTUATION`: the non-alphanumeric characters found in a [Vesta Board](https://www.vestaboard.com/ces/)
 
 ## License
