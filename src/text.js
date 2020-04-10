@@ -16,13 +16,10 @@ const Text = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
 `;
 
-export default ({
-  children,
-  color,
-  position,
-}: Props): React.Element<*> => (
+export default ({ children, color, position }: Props): React.Element<*> => (
   <Text position={position} color={color}>
     {children}
   </Text>
