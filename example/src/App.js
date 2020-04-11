@@ -6,6 +6,8 @@ import Swatch from './Swatch';
 import Wrapper from './Wrapper';
 import { defaultInputs } from './constants';
 
+import SplitFlapDisplayPackage from 'react-split-flap-display/package.json';
+
 const typeToCharSetArray = {
   numeric: SplitFlapDisplay.NUMERIC,
   alpha: SplitFlapDisplay.ALPHA,
@@ -37,7 +39,7 @@ export default class App extends Component {
     };
   }
 
-  onSelect = event => {
+  onSelect = (event) => {
     const exampleSet = event.target.value;
     let value = this.state.value;
     let minLength = this.state.minLength;
@@ -48,12 +50,12 @@ export default class App extends Component {
     this.setState({ exampleSet, minLength, value });
   };
 
-  generateInputHandler = stateKey => event => this.setState({ [stateKey]: event.target.value });
+  generateInputHandler = (stateKey) => (event) => this.setState({ [stateKey]: event.target.value });
 
   render() {
     return (
       <div className="container">
-        <h3>React Split Flap Display</h3>
+        <h3>React Split Flap Display v{SplitFlapDisplayPackage.version}</h3>
         <div className="flex-container-vertical">
           <Wrapper>
             <SplitFlapDisplay
@@ -75,10 +77,8 @@ export default class App extends Component {
               <Wrapper>
                 <div>
                   <label>
-                    display:&nbsp;<input
-                      value={this.state.value}
-                      onChange={this.generateInputHandler('value')}
-                    />
+                    display:&nbsp;
+                    <input value={this.state.value} onChange={this.generateInputHandler('value')} />
                   </label>
                 </div>
                 <div>
@@ -91,14 +91,16 @@ export default class App extends Component {
                   </select>
                 </div>
                 <div>
-                  character width:&nbsp;<input
+                  character width:&nbsp;
+                  <input
                     value={this.state.characterWidth}
                     onChange={this.generateInputHandler('characterWidth')}
                   />
                 </div>
                 <div>
                   <label>
-                    min length:&nbsp;<input
+                    min length:&nbsp;
+                    <input
                       type="number"
                       value={this.state.minLength}
                       onChange={this.generateInputHandler('minLength')}
@@ -131,7 +133,8 @@ export default class App extends Component {
                 </div>
                 <div>
                   <label>
-                    step (ms):&nbsp;<input
+                    step (ms):&nbsp;
+                    <input
                       type="number"
                       value={this.state.step}
                       onChange={this.generateInputHandler('step')}
@@ -144,33 +147,35 @@ export default class App extends Component {
                   background color:&nbsp;
                   <Swatch
                     color={this.state.background}
-                    onChange={color => this.setState({ background: color.hex })}
+                    onChange={(color) => this.setState({ background: color.hex })}
                   />
                 </div>
                 <div>
                   border color:&nbsp;
                   <Swatch
                     color={this.state.borderColor}
-                    onChange={color => this.setState({ borderColor: color.hex })}
+                    onChange={(color) => this.setState({ borderColor: color.hex })}
                   />
                 </div>
                 <div>
                   text color:&nbsp;
                   <Swatch
                     color={this.state.textColor}
-                    onChange={color => this.setState({ textColor: color.hex })}
+                    onChange={(color) => this.setState({ textColor: color.hex })}
                   />
                 </div>
               </Wrapper>
               <Wrapper>
                 <div>
-                  border width:&nbsp;<input
+                  border width:&nbsp;
+                  <input
                     value={this.state.borderWidth}
                     onChange={this.generateInputHandler('borderWidth')}
                   />
                 </div>
                 <div>
-                  font size:&nbsp;<input
+                  font size:&nbsp;
+                  <input
                     value={this.state.fontSize}
                     onChange={this.generateInputHandler('fontSize')}
                   />

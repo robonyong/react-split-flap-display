@@ -1,4 +1,3 @@
-/* @flow */
 /**
  * @class SplitFlapDisplay
  */
@@ -11,47 +10,47 @@ import * as characterPresets from './constants';
 import SplitFlapCharacter from './Character';
 
 type Props = {
-  background: string,
-  borderColor: string,
-  borderWidth: string,
-  characterSet: Array<string>,
-  characterWidth?: string,
-  fontSize: string,
-  minLength?: number,
-  padDirection: string,
-  step: number,
-  textColor: string,
-  value: string,
+  background: string;
+  borderColor: string;
+  borderWidth: string;
+  characterSet: Array<string>;
+  characterWidth?: string;
+  fontSize: string;
+  minLength?: number;
+  padDirection: string;
+  step: number;
+  textColor: string;
+  value: string;
 };
 
 type State = {
-  currValue: string,
-  escapedFinalValue: string,
-  prevValue: string,
+  currValue: string;
+  escapedFinalValue: string;
+  prevValue: string;
 };
 
-/* eslint-disable indent */
-const Wrapper = styled.div`
+type StyleProps = {
+  borderColor: string;
+  borderWidth: string;
+  color: string;
+  fontSize: string;
+};
+
+const Wrapper = styled.div<StyleProps>`
   display: flex;
-  color: ${({ color }: { color: string }): string => color};
-  font-size: ${({ fontSize }: { fontSize: string }): string => fontSize};
+  color: ${({ color }): string => color};
+  font-size: ${({ fontSize }): string => fontSize};
   > * {
     &:not(:first-child) {
-      border-left: ${({
-        borderColor,
-        borderWidth,
-      }: {
-        borderColor: string,
-        borderWidth: string,
-      }): string => `${borderColor} ${borderWidth} solid`};
+      border-left: ${({ borderColor, borderWidth }): string =>
+        `${borderColor} ${borderWidth} solid`};
     }
   }
 `;
-/* eslint-enable indent */
 
-export default class SplitFlapDisplay extends React.Component<Props, State> {
-  state: State;
-  updateTimer: ?TimeoutID;
+class SplitFlapDisplay extends React.PureComponent<Props, State> {
+  readonly state: State;
+  updateTimer: number | null | undefined;
   ALPHA: Array<string>;
   NUMERIC: Array<string>;
   PUNCTUATION: Array<string>;
@@ -73,9 +72,7 @@ export default class SplitFlapDisplay extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const initialValue = Array(props.value.length)
-      .fill(props.characterSet[0])
-      .join('');
+    const initialValue = Array(props.value.length).fill(props.characterSet[0]).join('');
 
     this.state = {
       currValue: initialValue,
@@ -153,7 +150,7 @@ export default class SplitFlapDisplay extends React.Component<Props, State> {
     }, this.props.step);
   };
 
-  render(): React.Element<*> {
+  render(): React.ReactElement<any> {
     const {
       background,
       borderColor,
@@ -185,19 +182,23 @@ export default class SplitFlapDisplay extends React.Component<Props, State> {
         color={textColor}
         fontSize={fontSize}
       >
-        {prevChars.map((v: string, idx: number): React.Element<*> => (
-          <SplitFlapCharacter
-            key={`split-flap-${idx}`}
-            background={background}
-            borderWidth={borderWidth}
-            characterWidth={characterWidth}
-            prevValue={v === ' ' ? '\u2007' : v}
-            step={step}
-            textColor={textColor}
-            value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
-          />
-        ))}
+        {prevChars.map(
+          (v: string, idx: number): React.ReactElement<any> => (
+            <SplitFlapCharacter
+              key={`split-flap-${idx}`}
+              background={background}
+              borderWidth={borderWidth}
+              characterWidth={characterWidth}
+              prevValue={v === ' ' ? '\u2007' : v}
+              step={step}
+              textColor={textColor}
+              value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
+            />
+          )
+        )}
       </Wrapper>
     );
   }
 }
+
+export default SplitFlapDisplay;
