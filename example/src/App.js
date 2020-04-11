@@ -6,6 +6,8 @@ import Swatch from './Swatch';
 import Wrapper from './Wrapper';
 import { defaultInputs } from './constants';
 
+import SplitFlapDisplayPackage from 'react-split-flap-display/package.json';
+
 const typeToCharSetArray = {
   numeric: SplitFlapDisplay.NUMERIC,
   alpha: SplitFlapDisplay.ALPHA,
@@ -53,7 +55,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
-        <h3>React Split Flap Display</h3>
+        <h3>React Split Flap Display v{SplitFlapDisplayPackage.version}</h3>
         <div className="flex-container-vertical">
           <Wrapper>
             <SplitFlapDisplay
