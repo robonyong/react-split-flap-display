@@ -1,4 +1,3 @@
-/* @flow */
 export const ALPHA = [
   ' ',
   'A',

@@ -1,15 +1,14 @@
 import babel from 'rollup-plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import { eslint } from 'rollup-plugin-eslint';
-import flow from 'rollup-plugin-flow';
+import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [
     {
       exports: 'named',
@@ -26,13 +25,13 @@ export default {
   ],
   external: ['react', 'react-dom', 'styled-components'],
   plugins: [
-    eslint(),
     postcss({
       modules: true,
     }),
-    flow(),
+    typescript({ jsx: 'preserve' }),
     babel({
       exclude: 'node_modules/**',
+      extensions: ['ts', 'tsx']
     }),
     resolve(),
     commonjs(),

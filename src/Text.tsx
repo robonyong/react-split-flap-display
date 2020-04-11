@@ -1,15 +1,16 @@
-/* @flow */
 import * as React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  children: React.Element<*> | string,
-  color: string,
-  position: string,
+  color: string;
+  position: string;
 };
 
-const Text = styled.div`
-  background: ${({ position, color }: { position: string, color: string }): string =>
+const Text =
+  styled.div <
+  Props >
+  `
+  background: ${({ position, color }): string =>
     position === 'top'
       ? `linear-gradient(${color} 50%, transparent 50%)`
       : `linear-gradient(transparent 50%, ${color} 50%)`};
@@ -19,8 +20,10 @@ const Text = styled.div`
   -webkit-text-fill-color: transparent;
 `;
 
-export default ({ children, color, position }: Props): React.Element<*> => (
+const TextComponent: React.FunctionComponent<Props> = ({ children, color, position }) => (
   <Text position={position} color={color}>
     {children}
   </Text>
 );
+
+export default TextComponent;
