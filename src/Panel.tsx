@@ -14,10 +14,7 @@ type PanelStyleProps = {
   position: string;
 };
 
-const HalfPanel =
-  styled.div <
-  PanelStyleProps >
-  `
+const HalfPanel = styled.div<PanelStyleProps>`
   position: ${({ position }: { position: string }): string =>
     position === 'top' ? 'relative' : 'absolute'};
   overflow: hidden;
@@ -69,10 +66,10 @@ const panelAnimationName = ({ direction }) => css`
   ${direction === 'in' ? FlipIn.getName() : FlipOut.getName()};
 `;
 
-const HalfFlipPanel =
-  styled(HalfPanel)<FlipPanelStyleProps>`
+const HalfFlipPanel = styled(HalfPanel)<FlipPanelStyleProps>`
   position: absolute;
-  animation: ${({ direction }) => direction === 'in' ? FlipIn : FlipOut} linear ${({ duration }) => `${duration}s`};
+  animation: ${({ direction }) => (direction === 'in' ? FlipIn : FlipOut)} linear
+    ${({ duration }) => `${duration}s`};
   animation-fill-mode: forwards;
   background: ${({ color, direction }): string =>
     direction === 'out'

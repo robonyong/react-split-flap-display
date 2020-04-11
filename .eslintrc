@@ -1,8 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-  ],
+  "extends": ["airbnb"],
   "env": {
     "es6": true
   },
@@ -13,17 +11,13 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "prettier",
-    "react"
-  ],
+  "plugins": ["prettier", "react"],
   "rules": {
     "no-confusing-arrow": 0,
-    object-curly-newline: ["error", { "multiline": true }],
+    "object-curly-newline": ["error", { "multiline": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }],
     "react/no-array-index-key": 0,
-    "react/sort-comp": 0,
+    "react/sort-comp": 0
   },
-  "settings": {
-  }
+  "settings": {}
 }

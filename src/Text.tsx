@@ -6,10 +6,7 @@ type Props = {
   position: string;
 };
 
-const Text =
-  styled.div <
-  Props >
-  `
+const Text = styled.div<Props>`
   background: ${({ position, color }): string =>
     position === 'top'
       ? `linear-gradient(${color} 50%, transparent 50%)`

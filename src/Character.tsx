@@ -19,10 +19,7 @@ type StyleProps = {
   characterWidth: string | null | undefined;
 };
 
-const Character =
-  styled.div <
-  StyleProps >
-  `
+const Character = styled.div<StyleProps>`
   background: ${({ background }): string => background};
   display: flex;
   justify-content: center;

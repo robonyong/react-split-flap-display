@@ -36,10 +36,7 @@ type StyleProps = {
   fontSize: string;
 };
 
-const Wrapper =
-  styled.div <
-  StyleProps >
-  `
+const Wrapper = styled.div<StyleProps>`
   display: flex;
   color: ${({ color }): string => color};
   font-size: ${({ fontSize }): string => fontSize};
@@ -75,9 +72,7 @@ class SplitFlapDisplay extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const initialValue = Array(props.value.length)
-      .fill(props.characterSet[0])
-      .join('');
+    const initialValue = Array(props.value.length).fill(props.characterSet[0]).join('');
 
     this.state = {
       currValue: initialValue,
@@ -187,18 +182,20 @@ class SplitFlapDisplay extends React.PureComponent<Props, State> {
         color={textColor}
         fontSize={fontSize}
       >
-        {prevChars.map((v: string, idx: number): React.ReactElement<any> => (
-          <SplitFlapCharacter
-            key={`split-flap-${idx}`}
-            background={background}
-            borderWidth={borderWidth}
-            characterWidth={characterWidth}
-            prevValue={v === ' ' ? '\u2007' : v}
-            step={step}
-            textColor={textColor}
-            value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
-          />
-        ))}
+        {prevChars.map(
+          (v: string, idx: number): React.ReactElement<any> => (
+            <SplitFlapCharacter
+              key={`split-flap-${idx}`}
+              background={background}
+              borderWidth={borderWidth}
+              characterWidth={characterWidth}
+              prevValue={v === ' ' ? '\u2007' : v}
+              step={step}
+              textColor={textColor}
+              value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
+            />
+          )
+        )}
       </Wrapper>
     );
   }

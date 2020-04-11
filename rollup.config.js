@@ -31,7 +31,7 @@ export default {
     typescript({ jsx: 'preserve' }),
     babel({
       exclude: 'node_modules/**',
-      extensions: ['ts', 'tsx']
+      extensions: ['ts', 'tsx'],
     }),
     resolve(),
     commonjs(),
