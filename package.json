@@ -1,92 +1,70 @@
 {
   "name": "react-split-flap-display",
   "version": "0.2.0",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "description": "React component for Split Flap (Solari) display",
   "author": "Robin Yang",
+  "homepage": "https://robonyong.github.io/react-split-flap-display",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:robonyong/react-split-flap-display.git"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/react": "^16.9.29",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.5",
+    "install-peers-cli": "^2.2.0",
+    "lint-staged": "^10.1.3",
+    "prepend-file": "^1.3.1",
+    "prettier": "^2.0.4",
+    "rollup": "^2.3.1",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "ts-node": "^8.8.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "styled-components": "^5.0.1"
+  },
   "scripts": {
-    "test": "react-scripts test --env=jsdom",
     "build": "rollup -c",
-    "start": "rollup -c -w",
-    "setup-example": "npm link && cd example && npm link react-split-flap-display",
-    "precommit": "lint-staged",
-    "prepare": "NODE_ENV=production npm run build",
-    "predeploy": "cd example && npm run build",
-    "prettier": "prettier --write .",
-    "deploy": "gh-pages -d example/build"
+    "build-watch": "rollup -c -w",
+    "prepublishOnly": "npm run build",
+    "postinstall": "install-peers -f && cd example && npm i",
+    "start-example": "cd example && npm start",
+    "deploy-example": "cd example && npm run deploy",
+    "dev": "concurrently --kill-others \"npm run build-watch\" \"npm run start-example\"",
+    "test": "npm run test:lint && npm run test:unit",
+    "pretest": "npm run build",
+    "test:unit": "ts-node test/test.ts",
+    "test:lint": "eslint ./src/**/*.ts ./src/**/*.tsx ./example/src/**/*.ts ./example/src/**/*.tsx",
+    "test:lint:fix": "npm run test:lint -- --fix"
   },
   "lint-staged": {
     "*.{js,json,css,md,ts,tsx}": [
       "prettier --write ."
-    ]
-  },
-  "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
-    "styled-components": "^4.0.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-external-helpers": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-decorators": "^7.0.0",
-    "@babel/plugin-proposal-do-expressions": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-bind": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.0.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "@rollup/plugin-commonjs": "11.0.2",
-    "@rollup/plugin-node-resolve": "7.1.1",
-    "@rollup/plugin-typescript": "4.0.0",
-    "@types/jest": "25.2.1",
-    "@types/node": "13.11.1",
-    "@types/react": "16.9.34",
-    "@types/react-dom": "16.9.6",
-    "@types/styled-components": "5.0.1",
-    "babel-eslint": "^10.0.0",
-    "babel-plugin-styled-components": "1.5.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb": "18.1.0",
-    "eslint-plugin-import": "2.20.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "3.1.2",
-    "eslint-plugin-react": "7.19.0",
-    "gh-pages": "2.0.1",
-    "husky": "4.2.5",
-    "lint-staged": "10.1.3",
-    "prettier": "2.0.4",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
-    "react-scripts": "3.4.1",
-    "rollup": "2.4.0",
-    "rollup-plugin-babel": "^4.0.1",
-    "rollup-plugin-postcss": "2.5.0",
-    "rollup-plugin-terser": "5.3.0",
-    "styled-components": "4.4.1",
-    "tslib": "1.11.1",
-    "typescript": "3.8.3"
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }

@@ -1,31 +1,26 @@
-/**
- * @class SplitFlapDisplay
- */
-
-import * as React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import * as characterPresets from './constants';
+import { NUMERIC } from './constants';
 
 import SplitFlapCharacter from './Character';
 
-type Props = {
+export interface SplitFlapDisplayProps {
   background: string;
   borderColor: string;
   borderWidth: string;
   characterSet: Array<string>;
-  characterWidth?: string;
+  characterWidth: string;
   fontSize: string;
   minLength?: number;
   padDirection: string;
   step: number;
   textColor: string;
   value: string;
-};
+}
 
-type State = {
+type DisplayState = {
   currValue: string;
-  escapedFinalValue: string;
   prevValue: string;
 };
 
@@ -46,93 +41,76 @@ const Wrapper = styled.div<StyleProps>`
         `${borderColor} ${borderWidth} solid`};
     }
   }
+  box-sizing: border-box;
 `;
 
-class SplitFlapDisplay extends React.PureComponent<Props, State> {
-  readonly state: State;
-  updateTimer: number | null | undefined;
-  ALPHA: Array<string>;
-  NUMERIC: Array<string>;
-  PUNCTUATION: Array<string>;
+const defaultProps = {
+  background: '#000000',
+  borderColor: '#dddddd',
+  borderWidth: '1px',
+  characterSet: NUMERIC,
+  characterWidth: '1em',
+  fontSize: '1em',
+  minLength: 5,
+  padDirection: 'left',
+  step: 200,
+  textColor: '#dddddd',
+  value: '94609',
+};
 
-  static ALPHA = characterPresets.ALPHA;
-  static NUMERIC = characterPresets.NUMERIC;
-  static PUNCTUATION = characterPresets.PUNCTUATION;
+const escapeValue = (value: string, characterSet: Array<string>): string =>
+  value
+    .split('')
+    .map((char: string): string => (characterSet.includes(char) ? char : characterSet[0]))
+    .join('');
 
-  static defaultProps = {
-    background: '#000000',
-    borderColor: '#dddddd',
-    borderWidth: '1px',
-    fontSize: '1em',
-    padDirection: 'left',
-    step: 200,
-    textColor: '#dddddd',
-  };
-
-  constructor(props: Props) {
-    super(props);
-
-    const initialValue = Array(props.value.length).fill(props.characterSet[0]).join('');
-
-    this.state = {
-      currValue: initialValue,
-      escapedFinalValue: this.escapeValue(props.value, props.characterSet),
-      prevValue: initialValue,
-    };
+const getMinLengthFill = (
+  currValue: string,
+  characterSet: Array<string>,
+  minLength: number | undefined
+): Array<string> => {
+  if (minLength && currValue.length < minLength) {
+    return Array(minLength - currValue.length).fill(characterSet[0]);
   }
+  return [];
+};
 
-  componentDidMount() {
-    this.updateValue();
-  }
+const SplitFlapDisplay = ({
+  background,
+  borderColor,
+  borderWidth,
+  characterSet,
+  characterWidth,
+  fontSize,
+  minLength,
+  padDirection,
+  step,
+  textColor,
+  value,
+}: SplitFlapDisplayProps = defaultProps) => {
+  const initialValue = Array(value.length).fill(characterSet[0]).join('');
+  const [prevValue, setPrevValue] = useState<string>(initialValue);
+  const [currValue, setCurrValue] = useState<string>(initialValue);
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.value !== this.props.value) {
-      const escapedFinalValue = this.escapeValue(nextProps.value, nextProps.characterSet);
-      this.setState({ escapedFinalValue });
-    }
-  }
+  // persisted vars that inform state
+  const shadowPrevValue = useRef<string>(initialValue);
+  const shadowCurrValue = useRef<string>(initialValue);
+  const updateTimer = useRef<number | null>(null);
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.value !== this.props.value) {
-      this.updateValue();
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.updateTimer) {
-      clearTimeout(this.updateTimer);
-      this.updateTimer = null;
-    }
-  }
-
-  escapeValue = (value: string, charSet: Array<string>): string =>
-    value
-      .split('')
-      .map((char: string): string => (charSet.includes(char) ? char : charSet[0]))
-      .join('');
-
-  getMinLengthFill = (value: string): Array<string> => {
-    const currValue: string = value || '';
-    const { characterSet, minLength } = this.props;
-    if (minLength && currValue.length < minLength) {
-      return Array(minLength - currValue.length).fill(characterSet[0]);
-    }
-    return [];
-  };
-
-  updateValue = () => {
-    if (this.updateTimer || this.state.prevValue === this.state.escapedFinalValue) {
+  const updateValue = () => {
+    const escapedFinalValue = escapeValue(value, characterSet);
+    if (updateTimer.current || shadowPrevValue.current === escapedFinalValue) {
       return;
     }
 
-    this.setState({ prevValue: this.state.currValue });
+    shadowPrevValue.current = shadowCurrValue.current;
+    setPrevValue(shadowPrevValue.current);
 
-    const currChars = this.state.currValue.split('');
-    const finalChars = this.state.escapedFinalValue.split('');
+    const currChars = shadowCurrValue.current.split('');
+    const finalChars = escapedFinalValue.split('');
 
     const nextValue = finalChars
       .map((char: string, idx: number): string => {
-        const { characterSet } = this.props;
         const currChar = currChars[idx];
         const charIdx = characterSet.indexOf(currChar);
         const nextChar =
@@ -143,62 +121,56 @@ class SplitFlapDisplay extends React.PureComponent<Props, State> {
       })
       .join('');
 
-    this.setState({ currValue: nextValue });
-    this.updateTimer = setTimeout(() => {
-      this.updateTimer = null;
-      this.updateValue();
-    }, this.props.step);
+    shadowCurrValue.current = nextValue;
+    setCurrValue(shadowCurrValue.current);
+
+    updateTimer.current = setTimeout(() => {
+      updateTimer.current = null;
+      updateValue();
+    }, step);
   };
 
-  render(): React.ReactElement<any> {
-    const {
-      background,
-      borderColor,
-      borderWidth,
-      characterWidth,
-      fontSize,
-      padDirection,
-      step,
-      textColor,
-    } = this.props;
-
-    const { currValue, prevValue } = this.state;
-
-    let prevChars;
-    let currChars;
-
-    if (padDirection === 'right') {
-      prevChars = [...prevValue.split(''), ...this.getMinLengthFill(prevValue)];
-      currChars = [...currValue.split(''), ...this.getMinLengthFill(currValue)];
-    } else {
-      prevChars = [...this.getMinLengthFill(prevValue), ...prevValue.split('')];
-      currChars = [...this.getMinLengthFill(currValue), ...currValue.split('')];
+  useEffect(updateValue, []);
+  useEffect(() => {
+    if (updateTimer.current) {
+      clearTimeout(updateTimer.current);
+      updateTimer.current = null;
     }
+    updateValue();
+  }, [value, characterSet, step]);
 
-    return (
-      <Wrapper
-        borderColor={borderColor}
-        borderWidth={borderWidth}
-        color={textColor}
-        fontSize={fontSize}
-      >
-        {prevChars.map(
-          (v: string, idx: number): React.ReactElement<any> => (
-            <SplitFlapCharacter
-              key={`split-flap-${idx}`}
-              background={background}
-              borderWidth={borderWidth}
-              characterWidth={characterWidth}
-              prevValue={v === ' ' ? '\u2007' : v}
-              step={step}
-              textColor={textColor}
-              value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
-            />
-          )
-        )}
-      </Wrapper>
-    );
+  let prevChars: string[];
+  let currChars: string[];
+
+  if (padDirection === 'right') {
+    prevChars = [...prevValue.split(''), ...getMinLengthFill(prevValue, characterSet, minLength)];
+    currChars = [...currValue.split(''), ...getMinLengthFill(currValue, characterSet, minLength)];
+  } else {
+    prevChars = [...getMinLengthFill(prevValue, characterSet, minLength), ...prevValue.split('')];
+    currChars = [...getMinLengthFill(currValue, characterSet, minLength), ...currValue.split('')];
   }
-}
+
+  return (
+    <Wrapper
+      borderColor={borderColor}
+      borderWidth={borderWidth}
+      color={textColor}
+      fontSize={fontSize}
+    >
+      {prevChars.map((v: string, idx: number) => (
+        <SplitFlapCharacter
+          key={`split-flap-${idx}`}
+          background={background}
+          borderWidth={borderWidth}
+          characterWidth={characterWidth}
+          prevValue={v === ' ' ? '\u2007' : v}
+          step={step}
+          textColor={textColor}
+          value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
+        />
+      ))}
+    </Wrapper>
+  );
+};
 
 export default SplitFlapDisplay;

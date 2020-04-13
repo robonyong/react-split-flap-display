@@ -1,3 +1,10 @@
+export interface defaultInputs {
+  numeric: string;
+  alpha: string;
+  alphanumeric: string;
+  punctuation: string;
+}
+
 export const defaultInputs = {
   numeric: '94103',
   alpha: 'TRENTON',
