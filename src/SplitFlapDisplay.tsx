@@ -6,7 +6,7 @@ import { NUMERIC } from './constants';
 import SplitFlapCharacter from './Character';
 
 export interface SplitFlapDisplayProps {
-  background: string;
+  background?: string;
   borderColor: string;
   borderWidth: string;
   characterSet: Array<string>;
@@ -76,17 +76,17 @@ const getMinLengthFill = (
 };
 
 const SplitFlapDisplay = ({
-  background,
-  borderColor,
-  borderWidth,
-  characterSet,
-  characterWidth,
-  fontSize,
-  minLength,
-  padDirection,
-  step,
-  textColor,
-  value,
+  background = defaultProps.background,
+  borderColor = defaultProps.borderColor,
+  borderWidth = defaultProps.borderWidth,
+  characterSet = defaultProps.characterSet,
+  characterWidth = defaultProps.characterWidth,
+  fontSize = defaultProps.fontSize,
+  minLength = defaultProps.minLength,
+  padDirection = defaultProps.padDirection,
+  step = defaultProps.step,
+  textColor = defaultProps.textColor,
+  value = defaultProps.value,
 }: SplitFlapDisplayProps = defaultProps) => {
   const initialValue = Array(value.length).fill(characterSet[0]).join('');
   const [prevValue, setPrevValue] = useState<string>(initialValue);
