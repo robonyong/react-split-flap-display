@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4e08656021f5f4d69e340380d3466ca9",
+    "revision": "a9e9edde3954a1dcfc31707200eff114",
     "url": "/react-split-flap-display/index.html"
   },
   {
-    "revision": "5871e05e3a0870b19d7f",
+    "revision": "9c6d85c90c17ca3ba23a",
     "url": "/react-split-flap-display/static/css/main.0f134674.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5871e05e3a0870b19d7f",
-    "url": "/react-split-flap-display/static/js/main.3334f84d.chunk.js"
+    "revision": "9c6d85c90c17ca3ba23a",
+    "url": "/react-split-flap-display/static/js/main.1db7cc29.chunk.js"
   },
   {
     "revision": "e6c8ee6b2b5bc016cdc3",
