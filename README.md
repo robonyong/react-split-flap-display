@@ -18,7 +18,7 @@ or
 yarn add react-split-flap-display
 ```
 
-This packages has a peer dependency on [`styled-components`](https://github.com/styled-components/styled-components)
+This package has a peer dependency on [`styled-components`](https://github.com/styled-components/styled-components)
 
 ## Usage
 
