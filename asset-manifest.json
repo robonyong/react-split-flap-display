@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/react-split-flap-display/static/css/main.e1c4e39d.chunk.css",
-    "main.js": "/react-split-flap-display/static/js/main.bc8b47a3.chunk.js",
-    "main.js.map": "/react-split-flap-display/static/js/main.bc8b47a3.chunk.js.map",
-    "runtime-main.js": "/react-split-flap-display/static/js/runtime-main.6428a5b6.js",
-    "runtime-main.js.map": "/react-split-flap-display/static/js/runtime-main.6428a5b6.js.map",
-    "static/js/2.337587ff.chunk.js": "/react-split-flap-display/static/js/2.337587ff.chunk.js",
-    "static/js/2.337587ff.chunk.js.map": "/react-split-flap-display/static/js/2.337587ff.chunk.js.map",
+    "main.css": "/react-split-flap-display/static/css/main.0f134674.chunk.css",
+    "main.js": "/react-split-flap-display/static/js/main.3334f84d.chunk.js",
+    "main.js.map": "/react-split-flap-display/static/js/main.3334f84d.chunk.js.map",
+    "runtime-main.js": "/react-split-flap-display/static/js/runtime-main.f729173a.js",
+    "runtime-main.js.map": "/react-split-flap-display/static/js/runtime-main.f729173a.js.map",
+    "static/js/2.bfbd1e01.chunk.js": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js",
+    "static/js/2.bfbd1e01.chunk.js.map": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js.map",
     "index.html": "/react-split-flap-display/index.html",
-    "precache-manifest.5e8590a6ca742e0b0946b2ae1676e17c.js": "/react-split-flap-display/precache-manifest.5e8590a6ca742e0b0946b2ae1676e17c.js",
+    "precache-manifest.2bccc54ce7825aa7f4eb04f4683df0fa.js": "/react-split-flap-display/precache-manifest.2bccc54ce7825aa7f4eb04f4683df0fa.js",
     "service-worker.js": "/react-split-flap-display/service-worker.js",
-    "static/css/main.e1c4e39d.chunk.css.map": "/react-split-flap-display/static/css/main.e1c4e39d.chunk.css.map",
-    "static/js/2.337587ff.chunk.js.LICENSE.txt": "/react-split-flap-display/static/js/2.337587ff.chunk.js.LICENSE.txt"
+    "static/css/main.0f134674.chunk.css.map": "/react-split-flap-display/static/css/main.0f134674.chunk.css.map",
+    "static/js/2.bfbd1e01.chunk.js.LICENSE.txt": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.6428a5b6.js",
-    "static/js/2.337587ff.chunk.js",
-    "static/css/main.e1c4e39d.chunk.css",
-    "static/js/main.bc8b47a3.chunk.js"
+    "static/js/runtime-main.f729173a.js",
+    "static/js/2.bfbd1e01.chunk.js",
+    "static/css/main.0f134674.chunk.css",
+    "static/js/main.3334f84d.chunk.js"
   ]
 }
