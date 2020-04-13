@@ -3,31 +3,38 @@
   "homepage": "https://robonyong.github.io/react-split-flap-display",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
   "dependencies": {
-    "react": "16.4.2",
-    "react-color": "2.13.8",
-    "react-dom": "16.4.2",
+    "@types/react-color": "^3.0.1",
+    "react": "^16.13.1",
+    "react-color": "^2.18.0",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "react-split-flap-display": "^0.2.0",
-    "styled-components": "^4.4.1"
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.8",
+    "@types/react": "^16.9.29",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.1",
+    "gh-pages": "^2.2.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

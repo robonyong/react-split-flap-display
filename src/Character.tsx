@@ -33,6 +33,8 @@ const Character = styled.div<StyleProps>`
     left: 0;
     width: 100%;
     height: 50%;
+    z-index: 5;
+    background: transparent;
     border-bottom: ${({ background, borderWidth }): string => `${background} ${borderWidth} solid`};
   }
 `;

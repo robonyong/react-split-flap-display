@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import Text from './Text';
 
@@ -15,12 +15,14 @@ type PanelStyleProps = {
 };
 
 const HalfPanel = styled.div<PanelStyleProps>`
-  position: ${({ position }: { position: string }): string =>
-    position === 'top' ? 'relative' : 'absolute'};
+  position: ${({ position }): string => (position === 'top' ? 'relative' : 'absolute')};
   overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
-const Panel: React.FunctionComponent<PanelProps> = ({ background, position, textColor, value }) => (
+const Panel: React.FC<PanelProps> = ({ position, textColor, value }) => (
   <HalfPanel position={position}>
     <Text position={position} color={textColor}>
       {value}
@@ -62,10 +64,6 @@ const FlipOut = keyframes`
   }
 `;
 
-const panelAnimationName = ({ direction }) => css`
-  ${direction === 'in' ? FlipIn.getName() : FlipOut.getName()};
-`;
-
 const HalfFlipPanel = styled(HalfPanel)<FlipPanelStyleProps>`
   position: absolute;
   animation: ${({ direction }) => (direction === 'in' ? FlipIn : FlipOut)} linear
@@ -76,10 +74,13 @@ const HalfFlipPanel = styled(HalfPanel)<FlipPanelStyleProps>`
       ? `linear-gradient(${color} 50%, transparent 50%)`
       : `linear-gradient(transparent 50%, ${color} 50%)`};
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
-export const FlipPanel: React.FunctionComponent<FlipPanelProps> = ({
+export const FlipPanel: React.FC<FlipPanelProps> = ({
   background,
   direction,
   duration,
