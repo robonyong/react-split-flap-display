@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/react-split-flap-display/precache-manifest.10440af1dc0cb1be51b79fd89abf86ff.js"
+  "/react-split-flap-display/precache-manifest.e910afab25d226eada6e8f785f984426.js"
 );
 
 self.addEventListener('message', (event) => {

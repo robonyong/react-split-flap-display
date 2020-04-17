@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/react-split-flap-display/static/css/main.0f134674.chunk.css",
-    "main.js": "/react-split-flap-display/static/js/main.1db7cc29.chunk.js",
-    "main.js.map": "/react-split-flap-display/static/js/main.1db7cc29.chunk.js.map",
+    "main.css": "/react-split-flap-display/static/css/main.3f2d46e7.chunk.css",
+    "main.js": "/react-split-flap-display/static/js/main.f0ee418f.chunk.js",
+    "main.js.map": "/react-split-flap-display/static/js/main.f0ee418f.chunk.js.map",
     "runtime-main.js": "/react-split-flap-display/static/js/runtime-main.f729173a.js",
     "runtime-main.js.map": "/react-split-flap-display/static/js/runtime-main.f729173a.js.map",
     "static/js/2.bfbd1e01.chunk.js": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js",
     "static/js/2.bfbd1e01.chunk.js.map": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js.map",
     "index.html": "/react-split-flap-display/index.html",
-    "precache-manifest.10440af1dc0cb1be51b79fd89abf86ff.js": "/react-split-flap-display/precache-manifest.10440af1dc0cb1be51b79fd89abf86ff.js",
+    "precache-manifest.e910afab25d226eada6e8f785f984426.js": "/react-split-flap-display/precache-manifest.e910afab25d226eada6e8f785f984426.js",
     "service-worker.js": "/react-split-flap-display/service-worker.js",
-    "static/css/main.0f134674.chunk.css.map": "/react-split-flap-display/static/css/main.0f134674.chunk.css.map",
+    "static/css/main.3f2d46e7.chunk.css.map": "/react-split-flap-display/static/css/main.3f2d46e7.chunk.css.map",
     "static/js/2.bfbd1e01.chunk.js.LICENSE.txt": "/react-split-flap-display/static/js/2.bfbd1e01.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f729173a.js",
     "static/js/2.bfbd1e01.chunk.js",
-    "static/css/main.0f134674.chunk.css",
-    "static/js/main.1db7cc29.chunk.js"
+    "static/css/main.3f2d46e7.chunk.css",
+    "static/js/main.f0ee418f.chunk.js"
   ]
 }
