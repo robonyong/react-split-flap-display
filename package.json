@@ -42,6 +42,7 @@
   "scripts": {
     "build": "rollup -c",
     "build-watch": "rollup -c -w",
+    "build-example": "npm run build && cd example && npm run build",
     "prepublishOnly": "npm run build",
     "setup-dev": "install-peers -f && cd example && npm i",
     "start-example": "cd example && npm start",
