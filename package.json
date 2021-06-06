@@ -1,6 +1,6 @@
 {
   "name": "react-split-flap-display",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "description": "React component for Split Flap (Solari) display",
