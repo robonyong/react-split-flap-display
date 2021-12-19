@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Panel, { FlipPanel } from './Panel';
+import defaultSound from './assets/flip.mp3';
+import { Howl } from 'howler';
 
 type Props = {
   background: string;
@@ -11,6 +13,7 @@ type Props = {
   step: number;
   textColor: string;
   value: string;
+  withSound?: boolean | string;
 };
 
 type StyleProps = {
@@ -39,7 +42,7 @@ const Character = styled.div<StyleProps>`
   }
 `;
 
-const CharacterComponent: React.FunctionComponent<Props> = ({
+const CharacterComponent: React.FC<Props> = ({
   background,
   borderWidth,
   characterWidth,
@@ -47,31 +50,75 @@ const CharacterComponent: React.FunctionComponent<Props> = ({
   step,
   textColor,
   value,
-}) => (
-  <Character background={background} borderWidth={borderWidth} characterWidth={characterWidth}>
-    <Panel position="top" background={background} textColor={textColor} value={value} />
-    <Panel position="bottom" background={background} textColor={textColor} value={prevValue} />
-    {prevValue !== value && (
-      <FlipPanel
-        direction="out"
-        duration={step / 1000}
-        position="top"
-        background={background}
-        textColor={textColor}
-        value={prevValue}
-      />
-    )}
-    {prevValue !== value && (
-      <FlipPanel
-        direction="in"
-        duration={step / 1000}
-        position="bottom"
-        background={background}
-        textColor={textColor}
-        value={value}
-      />
-    )}
-  </Character>
-);
+  withSound,
+}) => {
+  const sound = React.useMemo(() => {
+    if (sound) {
+      sound.unload();
+    }
+    if (!withSound) {
+      return null;
+    }
+    const newSound = new Howl({
+      src: [withSound === true ? defaultSound : withSound],
+      onloaderror: (_id, error) => {
+        console.error('failed to load sound', error);
+      },
+      onplayerror: (_id, error) => {
+        console.warn('failed to play sound', error);
+      },
+    });
+    return newSound;
+  }, [withSound]);
+
+  React.useEffect(() => {
+    if (prevValue !== value && sound?.state() === 'loaded') {
+      // play if the sound will complete within a step
+      if (Math.round(sound.duration() * 1000) <= step) {
+        const delay = Math.round((step - sound.duration() * 1000) / 2);
+        setTimeout(() => {
+          if (sound) {
+            sound.play();
+          }
+        }, delay);
+      }
+    }
+  }, [prevValue, value, sound, step]);
+
+  React.useEffect(() => {
+    return () => {
+      if (sound) {
+        sound.unload();
+      }
+    };
+  }, []);
+
+  return (
+    <Character background={background} borderWidth={borderWidth} characterWidth={characterWidth}>
+      <Panel position="top" background={background} textColor={textColor} value={value} />
+      <Panel position="bottom" background={background} textColor={textColor} value={prevValue} />
+      {prevValue !== value && (
+        <FlipPanel
+          direction="out"
+          duration={step / 1000}
+          position="top"
+          background={background}
+          textColor={textColor}
+          value={prevValue}
+        />
+      )}
+      {prevValue !== value && (
+        <FlipPanel
+          direction="in"
+          duration={step / 1000}
+          position="bottom"
+          background={background}
+          textColor={textColor}
+          value={value}
+        />
+      )}
+    </Character>
+  );
+};
 
 export default CharacterComponent;

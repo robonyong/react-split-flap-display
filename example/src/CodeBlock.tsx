@@ -12,6 +12,7 @@ type CodeBlockProps = {
   step: number;
   textColor: string;
   value: string;
+  withSound: string;
 };
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -26,6 +27,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   step,
   textColor,
   value,
+  withSound,
 }) => (
   <pre>
     {`
@@ -41,6 +43,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     step={${step}}
     textColor='${textColor}'
     value='${value}'
+    withSound={${withSound}}
   />
   `}
   </pre>

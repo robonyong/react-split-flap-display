@@ -1,4 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
+import url from '@rollup/plugin-url';
+import copy from 'rollup-plugin-copy';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 
 export default [
@@ -9,6 +13,18 @@ export default [
       typescript({
         typescript: require('typescript'),
       }),
+      url({
+        include: ['**/*.mp3'],
+        limit: 100000,
+      }),
+      copy({
+        targets: [
+          { src: 'src/assets/**/*', dest: 'dist/assets/' },
+          { src: 'src/assets/**/*', dest: 'example/src/ReactSplitFlapDisplay/assets' },
+        ],
+      }),
+      nodeResolve(),
+      commonjs(),
     ],
     output: [
       { file: pkg.main, format: 'cjs', exports: 'named' },
