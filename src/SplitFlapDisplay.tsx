@@ -17,6 +17,7 @@ export interface SplitFlapDisplayProps {
   step: number;
   textColor: string;
   value: string;
+  withSound?: boolean | string;
 }
 
 type DisplayState = {
@@ -75,7 +76,7 @@ const getMinLengthFill = (
   return [];
 };
 
-const SplitFlapDisplay = ({
+const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
   background = defaultProps.background,
   borderColor = defaultProps.borderColor,
   borderWidth = defaultProps.borderWidth,
@@ -87,7 +88,8 @@ const SplitFlapDisplay = ({
   step = defaultProps.step,
   textColor = defaultProps.textColor,
   value = defaultProps.value,
-}: SplitFlapDisplayProps = defaultProps) => {
+  withSound,
+} = defaultProps) => {
   const initialValue = Array(value.length).fill(characterSet[0]).join('');
   const [prevValue, setPrevValue] = useState<string>(initialValue);
   const [currValue, setCurrValue] = useState<string>(initialValue);
@@ -95,7 +97,7 @@ const SplitFlapDisplay = ({
   // persisted vars that inform state
   const shadowPrevValue = useRef<string>(initialValue);
   const shadowCurrValue = useRef<string>(initialValue);
-  const updateTimer = useRef<number | null>(null);
+  const updateTimer = useRef<NodeJS.Timeout | null>(null);
 
   const updateValue = () => {
     const escapedFinalValue = escapeValue(value, characterSet);
@@ -167,6 +169,7 @@ const SplitFlapDisplay = ({
           step={step}
           textColor={textColor}
           value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
+          withSound={withSound}
         />
       ))}
     </Wrapper>

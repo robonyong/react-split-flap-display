@@ -6,7 +6,7 @@ type SwatchProps = {
   onChange: ColorChangeHandler;
 };
 
-const Swatch = ({ color, onChange }: SwatchProps) => {
+const Swatch: React.FC<SwatchProps> = ({ color, onChange }) => {
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false);
 
   return (

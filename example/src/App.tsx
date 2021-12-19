@@ -23,7 +23,7 @@ const typeToCharSet = {
   punctuation: '[...ALPHA, ...PUNCTUATION]',
 };
 
-const App = () => {
+const App: React.FC<Record<string, never>> = () => {
   const [exampleSet, setExampleSet] = useState<DefaultInputKeys>('numeric');
   const [background, setBackground] = useState<string>('#000000');
   const [borderColor, setBorderColor] = useState<string>('#dddddd');
@@ -35,11 +35,34 @@ const App = () => {
   const [value, setValue] = useState<string>(defaultInputs.numeric);
   const [textColor, setTextColor] = useState<string>('#dddddd');
   const [step, setStep] = useState<number>(200);
+  const [withSound, setWithSound] = useState<boolean | string>(false);
+  const [withCustomSound, setWithCustomSound] = useState<string>('');
 
-  const generateInputHandler = (setFn: SetStateAction<any>) => (event: ChangeEvent<HTMLInputElement>): void =>
-    setFn(event.target.value);
-  const generateColorInputHandler = (setFn: SetStateAction<any>): ColorChangeHandler => (color): void =>
-    setFn(color.hex);
+  const generateInputHandler =
+    (setFn: SetStateAction<any>) =>
+    (event: ChangeEvent<HTMLInputElement>): void =>
+      setFn(event.target.value);
+  const generateColorInputHandler =
+    (setFn: SetStateAction<any>): ColorChangeHandler =>
+    (color): void =>
+      setFn(color.hex);
+  const onWithSoundToggle = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === 'false') {
+      setWithSound(false);
+    }
+    if (event.target.value === 'true') {
+      setWithSound(true);
+    }
+    if (event.target.value === 'custom') {
+      setWithSound(withCustomSound);
+    }
+  };
+  const onCustomSoundInput = (event: ChangeEvent<HTMLInputElement>) => {
+    if (typeof withSound === 'string') {
+      setWithSound(event.target.value);
+    }
+    setWithCustomSound(event.target.value);
+  };
 
   const onSelect = (event: ChangeEvent<HTMLSelectElement>): void => {
     const selectedExample = event.target.value as DefaultInputKeys;
@@ -68,6 +91,7 @@ const App = () => {
             step={step}
             textColor={textColor}
             value={value}
+            withSound={withSound}
           />
         </Wrapper>
         <div className="flex-container-horizontal">
@@ -153,8 +177,36 @@ const App = () => {
                 <input value={fontSize} onChange={generateInputHandler(setFontSize)} />
               </div>
             </Wrapper>
+            <Wrapper>
+              <div>
+                <label>
+                  with sound:&nbsp;
+                  <label>
+                    <input type="radio" value="false" onChange={onWithSoundToggle} checked={withSound === false} />
+                    no sound
+                  </label>
+                  &nbsp;
+                  <label>
+                    <input type="radio" value="true" onChange={onWithSoundToggle} checked={withSound === true} />
+                    default sound
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="custom"
+                      onChange={onWithSoundToggle}
+                      checked={typeof withSound === 'string'}
+                    />
+                    custom sound source
+                  </label>
+                </label>
+                &nbsp;
+                {typeof withSound === 'string' && <input value={withCustomSound} onChange={onCustomSoundInput} />}
+              </div>
+            </Wrapper>
           </div>
           <CodeBlock
+            // withSound={withSound}
             background={background}
             borderColor={borderColor}
             borderWidth={borderWidth}
@@ -166,6 +218,7 @@ const App = () => {
             step={step}
             textColor={textColor}
             value={value}
+            withSound={JSON.stringify(withSound)}
           />
         </div>
       </div>
