@@ -222,6 +222,7 @@ const App: React.FC<Record<string, never>> = () => {
           />
         </div>
       </div>
+      <a href="https://github.com/robonyong/react-split-flap-display">github</a>
     </div>
   );
 };

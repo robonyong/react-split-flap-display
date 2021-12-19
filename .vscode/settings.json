@@ -3,23 +3,11 @@
   "editor.detectIndentation": false,
   "editor.renderWhitespace": "boundary",
   "files.exclude": {
-    // "**/dist": true,
+    "**/dist": true,
     "**/.rpt2_cache": true
   },
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "editor.formatOnSave": true,
-  // "[javascript]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[javascriptreact]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[typescript]": {
-  //   "editor.formatOnSave": true
-  // },
-  // "[typescriptreact]": {
-  //   "editor.formatOnSave": true
-  // },
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "editor.codeActionsOnSave": {
