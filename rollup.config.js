@@ -1,8 +1,10 @@
+import path from 'path';
 import typescript from 'rollup-plugin-typescript2';
 import url from '@rollup/plugin-url';
 import copy from 'rollup-plugin-copy';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import license from 'rollup-plugin-license';
 import pkg from './package.json';
 
 export default [
@@ -25,6 +27,13 @@ export default [
       }),
       nodeResolve(),
       commonjs(),
+      license({
+        banner: {
+          content: {
+            file: path.join(__dirname, 'LICENSE'),
+          },
+        },
+      }),
     ],
     output: [
       { file: pkg.main, format: 'cjs', exports: 'named' },
