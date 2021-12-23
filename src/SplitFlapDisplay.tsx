@@ -20,11 +20,6 @@ export interface SplitFlapDisplayProps {
   withSound?: boolean | string;
 }
 
-type DisplayState = {
-  currValue: string;
-  prevValue: string;
-};
-
 type StyleProps = {
   borderColor: string;
   borderWidth: string;
@@ -99,7 +94,7 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
   const shadowCurrValue = useRef<string>(initialValue);
   const updateTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const updateValue = () => {
+  const updateValue = React.useCallback(() => {
     const escapedFinalValue = escapeValue(value, characterSet);
     if (updateTimer.current || shadowPrevValue.current === escapedFinalValue) {
       return;
@@ -130,16 +125,16 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
       updateTimer.current = null;
       updateValue();
     }, step);
-  };
+  }, [characterSet, step, value]);
 
-  useEffect(updateValue, []);
+  useEffect(updateValue, [updateValue]);
   useEffect(() => {
     if (updateTimer.current) {
       clearTimeout(updateTimer.current);
       updateTimer.current = null;
     }
     updateValue();
-  }, [value, characterSet, step]);
+  }, [value, characterSet, step, updateValue]);
 
   let prevChars: string[];
   let currChars: string[];
