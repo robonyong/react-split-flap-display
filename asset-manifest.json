@@ -1,21 +1,13 @@
 {
   "files": {
-    "main.css": "/react-split-flap-display/static/css/main.26134f85.chunk.css",
-    "main.js": "/react-split-flap-display/static/js/main.8156ec83.chunk.js",
-    "main.js.map": "/react-split-flap-display/static/js/main.8156ec83.chunk.js.map",
-    "runtime-main.js": "/react-split-flap-display/static/js/runtime-main.fceeff53.js",
-    "runtime-main.js.map": "/react-split-flap-display/static/js/runtime-main.fceeff53.js.map",
-    "static/js/2.e200760c.chunk.js": "/react-split-flap-display/static/js/2.e200760c.chunk.js",
-    "static/js/2.e200760c.chunk.js.map": "/react-split-flap-display/static/js/2.e200760c.chunk.js.map",
+    "main.css": "/react-split-flap-display/static/css/main.94288c82.css",
+    "main.js": "/react-split-flap-display/static/js/main.952732dd.js",
     "index.html": "/react-split-flap-display/index.html",
-    "static/css/main.26134f85.chunk.css.map": "/react-split-flap-display/static/css/main.26134f85.chunk.css.map",
-    "static/js/2.e200760c.chunk.js.LICENSE.txt": "/react-split-flap-display/static/js/2.e200760c.chunk.js.LICENSE.txt",
-    "static/js/main.8156ec83.chunk.js.LICENSE.txt": "/react-split-flap-display/static/js/main.8156ec83.chunk.js.LICENSE.txt"
+    "main.94288c82.css.map": "/react-split-flap-display/static/css/main.94288c82.css.map",
+    "main.952732dd.js.map": "/react-split-flap-display/static/js/main.952732dd.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.fceeff53.js",
-    "static/js/2.e200760c.chunk.js",
-    "static/css/main.26134f85.chunk.css",
-    "static/js/main.8156ec83.chunk.js"
+    "static/css/main.94288c82.css",
+    "static/js/main.952732dd.js"
   ]
 }
