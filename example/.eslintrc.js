@@ -13,6 +13,7 @@ module.exports = {
       jsx: true,
     },
   },
+  root: true,
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_|^req|^next' }],
     '@typescript-eslint/no-explicit-any': 0,

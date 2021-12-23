@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -13,6 +14,7 @@ module.exports = {
       jsx: true,
     },
   },
+  root: true,
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_|^req|^next' }],
     '@typescript-eslint/no-explicit-any': 0,

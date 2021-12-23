@@ -52,24 +52,25 @@ const CharacterComponent: React.FC<Props> = ({
   value,
   withSound,
 }) => {
-  const sound = React.useMemo(() => {
-    if (sound) {
-      sound.unload();
+  const [sound, setSound] = React.useState<Howl | null>(null);
+  const [soundSrc, setSoundSrc] = React.useState<string | boolean | undefined>();
+  React.useEffect(() => {
+    if (withSound !== soundSrc) {
+      const newSound = !!withSound
+        ? new Howl({
+            src: [withSound === true ? defaultSound : withSound],
+            onloaderror: (_id, error) => {
+              console.warn('ReactSplitFlapDisplay failed to load sound', error);
+            },
+            onplayerror: (_id, error) => {
+              console.warn('ReactSplitFlapDisplay failed to play sound', error);
+            },
+          })
+        : null;
+      setSound(newSound);
+      setSoundSrc(withSound);
     }
-    if (!withSound) {
-      return null;
-    }
-    const newSound = new Howl({
-      src: [withSound === true ? defaultSound : withSound],
-      onloaderror: (_id, error) => {
-        console.error('failed to load sound', error);
-      },
-      onplayerror: (_id, error) => {
-        console.warn('failed to play sound', error);
-      },
-    });
-    return newSound;
-  }, [withSound]);
+  }, [withSound, sound, soundSrc, setSound, setSoundSrc]);
 
   React.useEffect(() => {
     if (prevValue !== value && sound?.state() === 'loaded') {
@@ -77,21 +78,23 @@ const CharacterComponent: React.FC<Props> = ({
       if (Math.round(sound.duration() * 1000) <= step) {
         const delay = Math.round((step - sound.duration() * 1000) / 2);
         setTimeout(() => {
-          if (sound) {
-            sound.play();
-          }
+          sound?.play();
         }, delay);
+      } else {
+        console.warn(
+          `ReactSplitFlapDisplay did not play sound; sound duration of ${
+            sound.duration() * 1000
+          }ms is longer than step duration ${step}ms`
+        );
       }
     }
   }, [prevValue, value, sound, step]);
 
   React.useEffect(() => {
     return () => {
-      if (sound) {
-        sound.unload();
-      }
+      sound?.unload();
     };
-  }, []);
+  }, [sound]);
 
   return (
     <Character background={background} borderWidth={borderWidth} characterWidth={characterWidth}>
