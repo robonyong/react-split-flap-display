@@ -53,24 +53,20 @@ const CharacterComponent: React.FC<Props> = ({
   withSound,
 }) => {
   const [sound, setSound] = React.useState<Howl | null>(null);
-  const [soundSrc, setSoundSrc] = React.useState(withSound);
+  const [soundSrc, setSoundSrc] = React.useState<string | boolean | undefined>();
   React.useEffect(() => {
-    if (!withSound) {
-      setSound(null);
-      setSoundSrc(withSound);
-      return;
-    }
-
-    if (withSound !== soundSrc || !sound) {
-      const newSound = new Howl({
-        src: [withSound === true ? defaultSound : withSound],
-        onloaderror: (_id, error) => {
-          console.warn('ReactSplitFlapDisplay failed to load sound', error);
-        },
-        onplayerror: (_id, error) => {
-          console.warn('ReactSplitFlapDisplay failed to play sound', error);
-        },
-      });
+    if (withSound !== soundSrc) {
+      const newSound = !!withSound
+        ? new Howl({
+            src: [withSound === true ? defaultSound : withSound],
+            onloaderror: (_id, error) => {
+              console.warn('ReactSplitFlapDisplay failed to load sound', error);
+            },
+            onplayerror: (_id, error) => {
+              console.warn('ReactSplitFlapDisplay failed to play sound', error);
+            },
+          })
+        : null;
       setSound(newSound);
       setSoundSrc(withSound);
     }

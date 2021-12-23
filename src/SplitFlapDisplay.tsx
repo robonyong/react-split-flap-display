@@ -135,6 +135,15 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
     updateValue();
   }, [updateValue]);
 
+  useEffect(() => {
+    return () => {
+      if (updateTimer.current) {
+        clearTimeout(updateTimer.current);
+        updateTimer.current = null;
+      }
+    };
+  }, []);
+
   let prevChars: string[];
   let currChars: string[];
 
