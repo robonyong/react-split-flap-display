@@ -8,7 +8,7 @@
     "react": "^16.13.1",
     "react-color": "^2.18.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "^5.0.0",
+    "react-scripts": "^5.0.1",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
@@ -19,6 +19,9 @@
     "@types/styled-components": "^5.0.1",
     "gh-pages": "^2.2.0",
     "typescript": "^4.5.3"
+  },
+  "overrides": {
+    "nth-check": "^2.1.1"
   },
   "scripts": {
     "predeploy": "npm run build",
