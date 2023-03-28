@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type Props = {
   color: string;
   position: string;
+  children: React.ReactNode;
 };
 
 const Text = styled.div<Props>`
@@ -17,7 +18,7 @@ const Text = styled.div<Props>`
   -webkit-text-fill-color: transparent;
 `;
 
-const TextComponent: React.FunctionComponent<Props> = ({ children, color, position }) => (
+const TextComponent: React.FC<Props> = ({ children, color, position }) => (
   <Text position={position} color={color}>
     {children}
   </Text>

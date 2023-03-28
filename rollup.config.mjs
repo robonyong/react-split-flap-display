@@ -1,20 +1,19 @@
 import path from 'path';
-import typescript from 'rollup-plugin-typescript2';
 import url from '@rollup/plugin-url';
 import copy from 'rollup-plugin-copy';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import license from 'rollup-plugin-license';
-import pkg from './package.json';
+import pkg from './package.json' assert { type: 'json' };
 
 export default [
   {
+    strictDeprecations: true,
     input: 'src/index.ts',
     external: Object.keys(pkg.peerDependencies || {}),
     plugins: [
-      typescript({
-        typescript: require('typescript'),
-      }),
+      typescript(),
       url({
         include: ['**/*.mp3'],
         limit: 100000,
@@ -30,19 +29,20 @@ export default [
       license({
         banner: {
           content: {
-            file: path.join(__dirname, 'LICENSE'),
+            file: './LICENSE',
           },
         },
       }),
     ],
     output: [
-      { file: pkg.main, format: 'cjs', exports: 'named' },
-      { file: pkg.module, format: 'esm', exports: 'named' },
+      { file: pkg.main, format: 'cjs', exports: 'named', sourcemap: false },
+      { file: pkg.module, format: 'esm', exports: 'named', sourcemap: false },
       {
         file: 'example/src/ReactSplitFlapDisplay/index.js',
         format: 'es',
         exports: 'named',
         banner: '/* eslint-disable */',
+        sourcemap: 'hidden',
       },
     ],
   },
