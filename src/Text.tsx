@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type Props = {
   color: string;
   position: string;
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 const Text = styled.div<Props>`
