@@ -1,0 +1,15 @@
+.wrapper {
+  --color: #ddd;
+
+  background: linear-gradient(transparent 50%, var(--color) 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  &[data-position='top'] {
+    background: linear-gradient(var(--color) 50%, transparent 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

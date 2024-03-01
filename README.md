@@ -12,14 +12,6 @@ A React component that mimics a Split-Flap/Solari display, cos I like Solari boa
 npm install --save react-split-flap-display
 ```
 
-or
-
-```bash
-yarn add react-split-flap-display
-```
-
-This package has a peer dependency on [`styled-components`](https://github.com/styled-components/styled-components)
-
 ## Usage
 
 ```jsx
@@ -42,8 +34,8 @@ class Display extends Component {
 | borderColor    | string                      | '#dddddd' | Hex or rgb() string for the color of the border between characters                                                                                                                         |
 | borderWidth    | string                      | '1px'     | Any valid CSS width value for the width of the border between characters                                                                                                                   |
 | characterSet   | Array of strings (required) | _null_    | The array of characters for the display to flip through                                                                                                                                    |
-| characterWidth | string                      | '1em'     | Any valid CSS width value for the width of each character. Useful with non-monospaced fonts                                                                                                |
-| fontSize       | string                      | '1em'     | Any valid CSS font-size value                                                                                                                                                              |
+| characterWidth | string                      | '1rem'     | Any valid CSS width value for the width of each character. Useful with non-monospaced fonts                                                                                                |
+| fontSize       | string                      | '1rem'     | Any valid CSS font-size value                                                                                                                                                              |
 | minLength      | number                      | _null_    | Minimum # of characters in the display                                                                                                                                                     |
 | padDirection   | string                      | 'left'    | If minLength > number of characters currently displayed, append blank characters to left or right side                                                                                     |
 | step           | number                      | 200       | Sets the speed (ms) of flips                                                                                                                                                               |

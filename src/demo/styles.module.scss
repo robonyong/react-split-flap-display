@@ -1,26 +1,14 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-pre {
-  background: #dddddd;
-  display: inline-block;
-  margin: 0;
-  padding: 15px;
-}
-
 .container {
   padding: 15px;
 }
 
-.flex-container-vertical {
+.flexContainerVertical {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 }
 
-.flex-container-horizontal {
+.flexContainerHorizontal {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -30,7 +18,7 @@ pre {
   margin: 0 15px 15px 0;
 }
 
-.swatch-container {
+.swatchContainer {
   display: inline-block;
   vertical-align: middle;
 }

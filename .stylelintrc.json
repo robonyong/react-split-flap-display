@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-recommended-scss"],
+  "ignoreFiles": ["**/dist/**/*", "**/node_modules/**/*", "**/storybook-static/**/*"],
+  "rules": {
+    "declaration-block-no-shorthand-property-overrides": true,
+    "no-descending-specificity": null,
+    "selector-pseudo-class-no-unknown": null
+  }
+}

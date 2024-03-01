@@ -15,7 +15,7 @@ type CodeBlockProps = {
   withSound: string;
 };
 
-const CodeBlock: React.FC<CodeBlockProps> = ({
+export default function CodeBlock({
   background,
   borderColor,
   borderWidth,
@@ -28,9 +28,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   textColor,
   value,
   withSound,
-}) => (
-  <pre>
-    {`
+}: CodeBlockProps) {
+  return (
+    <pre>
+      {`
   <SplitFlapDisplay
     background='${background}'
     borderColor='${borderColor}'
@@ -46,7 +47,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     withSound={${withSound}}
   />
   `}
-  </pre>
-);
-
-export default CodeBlock;
+    </pre>
+  );
+}

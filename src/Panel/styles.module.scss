@@ -1,0 +1,57 @@
+.half {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &[data-position='top'] {
+    position: relative;
+  }
+}
+
+.halfFlip {
+  --color: #000;
+  --duration: 200ms;
+
+  animation: flipIn var(--duration) linear;
+  animation-fill-mode: forwards;
+  background: linear-gradient(transparent 50%, var(--color) 50%);
+  display: flex;
+  justify-content: center;
+  -webkit-box-pack: center;
+  position: absolute;
+  opacity: 1;
+  overflow: hidden;
+  width: 100%;
+  z-index: 2;
+
+  &[data-direction='out'] {
+    animation-name: flipOut;
+    background: linear-gradient(var(--color) 50%, transparent 50%);
+  }
+}
+
+@keyframes flipIn {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  50% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes flipOut {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
