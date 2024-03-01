@@ -34,8 +34,8 @@ class Display extends Component {
 | borderColor    | string                      | '#dddddd' | Hex or rgb() string for the color of the border between characters                                                                                                                         |
 | borderWidth    | string                      | '1px'     | Any valid CSS width value for the width of the border between characters                                                                                                                   |
 | characterSet   | Array of strings (required) | _null_    | The array of characters for the display to flip through                                                                                                                                    |
-| characterWidth | string                      | '1rem'     | Any valid CSS width value for the width of each character. Useful with non-monospaced fonts                                                                                                |
-| fontSize       | string                      | '1rem'     | Any valid CSS font-size value                                                                                                                                                              |
+| characterWidth | string                      | '1rem'    | Any valid CSS width value for the width of each character. Useful with non-monospaced fonts                                                                                                |
+| fontSize       | string                      | '1rem'    | Any valid CSS font-size value                                                                                                                                                              |
 | minLength      | number                      | _null_    | Minimum # of characters in the display                                                                                                                                                     |
 | padDirection   | string                      | 'left'    | If minLength > number of characters currently displayed, append blank characters to left or right side                                                                                     |
 | step           | number                      | 200       | Sets the speed (ms) of flips                                                                                                                                                               |
@@ -43,7 +43,7 @@ class Display extends Component {
 | value          | string (required)           | _null_    | The string of characters to display or flip to                                                                                                                                             |
 | withSound      | boolean or string           | _null_    | Optionally load and play a sound with every flip.<br/>Sound duration must be less than or equal to `step` duration.<br/>`true` loads an mp3 I recorded of a single Vestaboard bit flipping |
 
-For `characterSet`, there are three convenience constants that ship with this component (you can see how they might be used in the example):
+For `characterSet`, there are three convenience constants that ship with this component from `react-split-flap-display/constants` (you can see how they might be used in the example):
 
 `NUMERIC`: `[0-9]`\
 `ALPHA`: whitespace `' '` + `[A-Z]`\

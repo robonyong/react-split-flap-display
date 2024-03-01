@@ -1,6 +1,6 @@
 {
   "name": "react-split-flap-display",
-  "version": "0.4.2-alpha.2",
+  "version": "0.5.0",
   "type": "module",
   "main": "dist/index.umd.cjs",
   "module": "dist/index.js",
