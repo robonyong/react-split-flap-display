@@ -6,8 +6,14 @@
   "module": "dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/split-flap-display.js",
-      "require": "./dist/split-flap-display.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./constants": {
+      "import": "./dist/constants.js",
+      "require": "./dist/constants.umd.cjs",
+      "types": "./dist/constants.d.ts"
     }
   },
   "description": "React component for Split Flap (Solari) display",
@@ -29,7 +35,6 @@
     "@types/react": "^18.2.61",
     "@types/react-color": "^3.0.12",
     "@types/react-dom": "^18.2.19",
-    "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
@@ -60,6 +65,7 @@
     "typescript": "^5.3.3",
     "typescript-plugin-css-modules": "^5.1.0",
     "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3",
     "vite-plugin-lib-inject-css": "^2.0.0",
     "vite-plugin-sass-dts": "^1.3.17"
   },

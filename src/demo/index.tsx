@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, SetStateAction } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ColorChangeHandler } from 'react-color';
-import SplitFlapDisplay, { ALPHA, NUMERIC, PUNCTUATION } from '../index';
+import SplitFlapDisplay from '../index';
+import { ALPHA, NUMERIC, PUNCTUATION } from '../constants';
 
 import CodeBlock from './CodeBlock';
 import Swatch from './Swatch';

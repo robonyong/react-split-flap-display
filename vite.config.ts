@@ -9,11 +9,19 @@ import license from 'rollup-plugin-license';
 import { defineConfig } from 'vite';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 import sassDts from 'vite-plugin-sass-dts';
+import dts from 'vite-plugin-dts';
 
 import pkg from './package.json' assert { type: 'json' };
 
 export default defineConfig({
-  plugins: [react(), sassDts(), libInjectCss()],
+  plugins: [
+    react(),
+    sassDts(),
+    dts({
+      include: ['src'],
+    }),
+    libInjectCss(),
+  ],
   css: {
     preprocessorOptions: {
       scss: {},
@@ -21,14 +29,14 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'SplitFlapDisplay',
-      fileName: 'split-flap-display',
-      formats: ['es', 'cjs'],
+      entry: {
+        'split-flap-display': resolve(__dirname, 'src/index.ts'),
+        constants: resolve(__dirname, 'src/constants.ts'),
+      },
     },
     rollupOptions: {
       strictDeprecations: true,
-      input: 'src/index.ts',
+      input: [resolve(__dirname, 'src/index.ts'), resolve(__dirname, 'src/constants.ts')],
       external: Object.keys(pkg.peerDependencies || {}),
       plugins: [
         typescript(),
@@ -37,10 +45,7 @@ export default defineConfig({
           limit: 100000,
         }),
         copy({
-          targets: [
-            { src: 'src/assets/**/*', dest: 'dist/assets/' },
-            { src: 'src/assets/**/*', dest: 'example/src/ReactSplitFlapDisplay/assets' },
-          ],
+          targets: [{ src: 'src/assets/**/*', dest: 'dist/assets/' }],
         }),
         nodeResolve(),
         commonjs(),
@@ -52,17 +57,13 @@ export default defineConfig({
           },
         }),
       ],
-      output: [
-        { file: pkg.main, format: 'cjs', exports: 'named', sourcemap: false },
-        { file: pkg.module, format: 'esm', exports: 'named', sourcemap: false },
-        {
-          file: 'example/src/ReactSplitFlapDisplay/index.js',
-          format: 'es',
-          exports: 'named',
-          banner: '/* eslint-disable */',
-          sourcemap: 'hidden',
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
         },
-      ],
+        preserveModules: false,
+      },
     },
   },
 });

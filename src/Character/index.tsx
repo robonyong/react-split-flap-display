@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import Panel, { FlipPanel } from '../Panel';
 import defaultSound from '../assets/flip.mp3';
-import { Howl } from 'howler';
+// @ts-expect-error the minified file is not in the type declarations
+import { Howl } from 'howler/dist/howler.min.js';
 
 import * as css from './styles.module.scss';
 
@@ -57,10 +58,10 @@ export default function CharacterComponent({
       const newSound = !!withSound
         ? new Howl({
             src: [withSound === true ? defaultSound : withSound],
-            onloaderror: (_id, error) => {
+            onloaderror: (_id: number, error: unknown) => {
               console.warn('ReactSplitFlapDisplay failed to load sound', error);
             },
-            onplayerror: (_id, error) => {
+            onplayerror: (_id: number, error: unknown) => {
               console.warn('ReactSplitFlapDisplay failed to play sound', error);
             },
           })
