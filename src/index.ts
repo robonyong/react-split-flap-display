@@ -1,2 +1,2 @@
-export { default } from './SplitFlapDisplay';
-export * from './constants';
+import SplitFlapDisplay from './SplitFlapDisplay';
+export default SplitFlapDisplay;

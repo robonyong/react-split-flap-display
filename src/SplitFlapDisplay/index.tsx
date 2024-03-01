@@ -1,52 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import clsx from 'clsx';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { NUMERIC } from './constants';
+import SplitFlapCharacter from '../Character';
+import { NUMERIC } from '../constants';
+import * as css from './styles.module.scss';
 
-import SplitFlapCharacter from './Character';
-
-export interface SplitFlapDisplayProps {
+export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
   background?: string;
-  borderColor: string;
-  borderWidth: string;
-  characterSet: Array<string>;
-  characterWidth: string;
-  fontSize: string;
+  borderColor?: string;
+  borderWidth?: string;
+  characterSet: string[];
+  characterWidth?: string;
+  fontSize?: string;
   minLength?: number;
-  padDirection: string;
-  step: number;
-  textColor: string;
+  padDirection?: string;
+  step?: number;
+  textColor?: string;
   value: string;
   withSound?: boolean | string;
 }
-
-type StyleProps = {
-  borderColor: string;
-  borderWidth: string;
-  color: string;
-  fontSize: string;
-};
-
-const Wrapper = styled.div<StyleProps>`
-  display: flex;
-  color: ${({ color }): string => color};
-  font-size: ${({ fontSize }): string => fontSize};
-  > * {
-    &:not(:first-child) {
-      border-left: ${({ borderColor, borderWidth }): string =>
-        `${borderColor} ${borderWidth} solid`};
-    }
-  }
-  box-sizing: border-box;
-`;
 
 const defaultProps = {
   background: '#000000',
   borderColor: '#dddddd',
   borderWidth: '1px',
   characterSet: NUMERIC,
-  characterWidth: '1em',
-  fontSize: '1em',
+  characterWidth: '1rem',
+  fontSize: '1rem',
   minLength: 5,
   padDirection: 'left',
   step: 200,
@@ -54,24 +34,21 @@ const defaultProps = {
   value: '94609',
 };
 
-const escapeValue = (value: string, characterSet: Array<string>): string =>
+const escapeValue = (value: string, characterSet: string[]): string =>
   value
     .split('')
-    .map((char: string): string => (characterSet.includes(char) ? char : characterSet[0]))
+    .map((char: string): string => (characterSet.includes(char) ? char : characterSet[0]!))
     .join('');
 
-const getMinLengthFill = (
-  currValue: string,
-  characterSet: Array<string>,
-  minLength: number | undefined
-): Array<string> => {
+const getMinLengthFill = (currValue: string, characterSet: string[], minLength: number | undefined): string[] => {
   if (minLength && currValue.length < minLength) {
     return Array(minLength - currValue.length).fill(characterSet[0]);
   }
   return [];
 };
 
-const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
+export default function SplitFlapDisplay({
+  className,
   background = defaultProps.background,
   borderColor = defaultProps.borderColor,
   borderWidth = defaultProps.borderWidth,
@@ -84,7 +61,8 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
   textColor = defaultProps.textColor,
   value = defaultProps.value,
   withSound,
-} = defaultProps) => {
+  ...rest
+}: SplitFlapDisplayProps) {
   const initialValue = Array(value.length).fill(characterSet[0]).join('');
   const [prevValue, setPrevValue] = useState<string>(initialValue);
   const [currValue, setCurrValue] = useState<string>(initialValue);
@@ -94,7 +72,7 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
   const shadowCurrValue = useRef<string>(initialValue);
   const updateTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const updateValue = React.useCallback(() => {
+  const updateValue = useCallback(() => {
     const escapedFinalValue = escapeValue(value, characterSet);
     if (updateTimer.current || shadowPrevValue.current === escapedFinalValue) {
       return;
@@ -108,12 +86,12 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
 
     const nextValue = finalChars
       .map((char: string, idx: number): string => {
-        const currChar = currChars[idx];
+        const currChar = currChars[idx]!;
         const charIdx = characterSet.indexOf(currChar);
         const nextChar =
           currChar === char || (charIdx === 0 && !characterSet.includes(char))
             ? currChar
-            : characterSet[(charIdx + 1) % characterSet.length];
+            : characterSet[(charIdx + 1) % characterSet.length]!;
         return nextChar;
       })
       .join('');
@@ -156,11 +134,15 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
   }
 
   return (
-    <Wrapper
-      borderColor={borderColor}
-      borderWidth={borderWidth}
-      color={textColor}
-      fontSize={fontSize}
+    <div
+      {...rest}
+      className={clsx(css.wrapper, className)}
+      style={{
+        '--border-color': borderColor,
+        '--border-width': borderWidth,
+        '--color': textColor,
+        '--font-size': fontSize,
+      }}
     >
       {prevChars.map((v: string, idx: number) => (
         <SplitFlapCharacter
@@ -171,12 +153,10 @@ const SplitFlapDisplay: React.FC<SplitFlapDisplayProps> = ({
           prevValue={v === ' ' ? '\u2007' : v}
           step={step}
           textColor={textColor}
-          value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]}
+          value={currChars[idx] === ' ' ? '\u2007' : currChars[idx]!}
           withSound={withSound}
         />
       ))}
-    </Wrapper>
+    </div>
   );
-};
-
-export default SplitFlapDisplay;
+}

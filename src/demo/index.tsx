@@ -1,11 +1,14 @@
 import React, { useState, ChangeEvent, SetStateAction } from 'react';
+import { createRoot } from 'react-dom/client';
 import { ColorChangeHandler } from 'react-color';
-import SplitFlapDisplay, { ALPHA, NUMERIC, PUNCTUATION } from './ReactSplitFlapDisplay';
+import SplitFlapDisplay from '../index';
+import { ALPHA, NUMERIC, PUNCTUATION } from '../constants';
 
 import CodeBlock from './CodeBlock';
 import Swatch from './Swatch';
-import Wrapper from './Wrapper';
 import { defaultInputs } from './constants';
+
+import * as css from './styles.module.scss';
 
 type DefaultInputKeys = keyof defaultInputs;
 
@@ -23,7 +26,7 @@ const typeToCharSet = {
   punctuation: '[...ALPHA, ...PUNCTUATION]',
 };
 
-const App: React.FC<Record<string, never>> = () => {
+export default function Demo() {
   const [exampleSet, setExampleSet] = useState<DefaultInputKeys>('numeric');
   const [background, setBackground] = useState<string>('#000000');
   const [borderColor, setBorderColor] = useState<string>('#dddddd');
@@ -75,10 +78,10 @@ const App: React.FC<Record<string, never>> = () => {
   };
 
   return (
-    <div className="container">
+    <div className={css.container}>
       <h3>React Split Flap Display</h3>
-      <div className="flex-container-vertical">
-        <Wrapper>
+      <div className={css.flexContainerVertical}>
+        <div className={css.wrapper}>
           <SplitFlapDisplay
             background={background}
             borderColor={borderColor}
@@ -93,10 +96,10 @@ const App: React.FC<Record<string, never>> = () => {
             value={value}
             withSound={withSound}
           />
-        </Wrapper>
-        <div className="flex-container-horizontal">
+        </div>
+        <div className={css.flexContainerHorizontal}>
           <div>
-            <Wrapper>
+            <div className={css.wrapper}>
               <div>
                 <label>
                   display:&nbsp;
@@ -152,8 +155,8 @@ const App: React.FC<Record<string, never>> = () => {
                   <input type="number" value={step} onChange={generateInputHandler(setStep)} />
                 </label>
               </div>
-            </Wrapper>
-            <Wrapper>
+            </div>
+            <div className={css.wrapper}>
               <div>
                 background color:&nbsp;
                 <Swatch color={background} onChange={generateColorInputHandler(setBackground)} />
@@ -166,8 +169,8 @@ const App: React.FC<Record<string, never>> = () => {
                 text color:&nbsp;
                 <Swatch color={textColor} onChange={generateColorInputHandler(setTextColor)} />
               </div>
-            </Wrapper>
-            <Wrapper>
+            </div>
+            <div className={css.wrapper}>
               <div>
                 border width:&nbsp;
                 <input value={borderWidth} onChange={generateInputHandler(setBorderWidth)} />
@@ -176,8 +179,8 @@ const App: React.FC<Record<string, never>> = () => {
                 font size:&nbsp;
                 <input value={fontSize} onChange={generateInputHandler(setFontSize)} />
               </div>
-            </Wrapper>
-            <Wrapper>
+            </div>
+            <div className={css.wrapper}>
               <div>
                 <label>
                   with sound:&nbsp;
@@ -203,10 +206,9 @@ const App: React.FC<Record<string, never>> = () => {
                 &nbsp;
                 {typeof withSound === 'string' && <input value={withCustomSound} onChange={onCustomSoundInput} />}
               </div>
-            </Wrapper>
+            </div>
           </div>
           <CodeBlock
-            // withSound={withSound}
             background={background}
             borderColor={borderColor}
             borderWidth={borderWidth}
@@ -225,6 +227,5 @@ const App: React.FC<Record<string, never>> = () => {
       <a href="https://github.com/robonyong/react-split-flap-display">github</a>
     </div>
   );
-};
-
-export default App;
+}
+createRoot(document.getElementById('app') as HTMLDivElement).render(<Demo />);

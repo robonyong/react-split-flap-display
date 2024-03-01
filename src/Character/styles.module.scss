@@ -1,0 +1,24 @@
+.wrapper {
+  --background: #000;
+  --character-width: '1rem';
+  --border-width: '1px';
+
+  background: var(--background);
+  display: flex;
+  justify-content: center;
+  width: var(--character-width);
+  padding: 0.5em;
+  position: relative;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 5;
+    background: transparent;
+    border-bottom: var(--background) var(--border-width) solid;
+  }
+}
