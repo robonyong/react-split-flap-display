@@ -7,15 +7,15 @@ import * as css from './styles.module.scss';
 
 export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
   background?: string;
-  borderColor: string;
-  borderWidth: string;
+  borderColor?: string;
+  borderWidth?: string;
   characterSet: string[];
-  characterWidth: string;
-  fontSize: string;
+  characterWidth?: string;
+  fontSize?: string;
   minLength?: number;
-  padDirection: string;
-  step: number;
-  textColor: string;
+  padDirection?: string;
+  step?: number;
+  textColor?: string;
   value: string;
   withSound?: boolean | string;
 }
