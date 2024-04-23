@@ -31,6 +31,9 @@ export default function Demo() {
   const [background, setBackground] = useState<string>('#000000');
   const [borderColor, setBorderColor] = useState<string>('#dddddd');
   const [borderWidth, setBorderWidth] = useState<string>('1px');
+  const [borderRadius, setBorderRadius] = useState<string>('10px');
+  const [margin, setMargin] = useState<string>('5px');
+  const [fontFamily, setFontFamily] = useState<string>('Arial, sans-serif');
   const [characterWidth, setCharacterWidth] = useState<string>('1em');
   const [fontSize, setFontSize] = useState<string>('2em');
   const [minLength, setMinLength] = useState<number>(defaultInputs.numeric.length);
@@ -77,6 +80,10 @@ export default function Demo() {
     }
   };
 
+  const onSelectFontFamily = (event: ChangeEvent<HTMLSelectElement>): void => {
+    setFontFamily(event.target.value);
+  };
+
   return (
     <div className={css.container}>
       <h3>React Split Flap Display</h3>
@@ -95,9 +102,9 @@ export default function Demo() {
             textColor={textColor}
             value={value}
             withSound={withSound}
-            borderRadius="10px"
-            margin="50px"
-            fontFamily="sans-serif"
+            borderRadius={borderRadius}
+            margin={margin}
+            fontFamily={fontFamily}
           />
         </div>
         <div className={css.flexContainerHorizontal}>
@@ -108,6 +115,14 @@ export default function Demo() {
                   display:&nbsp;
                   <input value={value} onChange={generateInputHandler(setValue)} />
                 </label>
+              </div>
+              <div>
+                font familty:&nbsp;
+                <select onChange={onSelectFontFamily}>
+                  <option value="Arial, sans-serif">sans-serif</option>
+                  <option value="Courier New, monospace">monospace </option>
+                  <option value="Times New Roman, serif">serif</option>
+                </select>
               </div>
               <div>
                 character set:&nbsp;
@@ -179,6 +194,14 @@ export default function Demo() {
                 <input value={borderWidth} onChange={generateInputHandler(setBorderWidth)} />
               </div>
               <div>
+                border radius:&nbsp;
+                <input value={borderRadius} onChange={generateInputHandler(setBorderRadius)} />
+              </div>
+              <div>
+                margin-right:&nbsp;
+                <input value={margin} onChange={generateInputHandler(setMargin)} />
+              </div>
+              <div>
                 font size:&nbsp;
                 <input value={fontSize} onChange={generateInputHandler(setFontSize)} />
               </div>
@@ -214,12 +237,15 @@ export default function Demo() {
           <CodeBlock
             background={background}
             borderColor={borderColor}
+            borderRadius={borderRadius}
             borderWidth={borderWidth}
             characterSet={typeToCharSet[exampleSet]}
             characterWidth={characterWidth}
+            fontFamily={fontFamily}
             fontSize={fontSize}
             minLength={minLength}
             padDirection={padDirection}
+            margin={margin}
             step={step}
             textColor={textColor}
             value={value}
