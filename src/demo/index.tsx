@@ -95,6 +95,9 @@ export default function Demo() {
             textColor={textColor}
             value={value}
             withSound={withSound}
+            borderRadius="10px"
+            margin="50px"
+            fontFamily="sans-serif"
           />
         </div>
         <div className={css.flexContainerHorizontal}>
