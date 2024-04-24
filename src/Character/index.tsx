@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
 import Panel, { FlipPanel } from '../Panel';
 import defaultSound from '../assets/flip.mp3';
 // @ts-expect-error the minified file is not in the type declarations
 import { Howl } from 'howler/dist/howler.min.js';
-
 import * as css from './styles.module.scss';
 
 interface Props {
   background: string;
   borderWidth: string;
+  borderRadius: string;
+  margin: string;
   characterWidth: string | undefined;
   prevValue: string;
   step: number;
@@ -22,10 +22,12 @@ interface StyleProps extends React.HTMLProps<HTMLDivElement> {
   background: string;
   borderWidth: string;
   characterWidth: string | undefined;
+  borderRadius?: string;
+  margin?: string;
 }
 
 function Character(props: StyleProps) {
-  const { children, background, borderWidth, characterWidth, ...rest } = props;
+  const { children, background, borderWidth, characterWidth, borderRadius, margin, ...rest } = props;
   return (
     <div
       {...rest}
@@ -34,6 +36,8 @@ function Character(props: StyleProps) {
         '--background': background,
         '--border-width': borderWidth,
         '--character-width': characterWidth,
+        '--border-radius': borderRadius,
+        '--margin': margin,
       }}
     >
       {children}
@@ -44,6 +48,8 @@ function Character(props: StyleProps) {
 export default function CharacterComponent({
   background,
   borderWidth,
+  borderRadius,
+  margin,
   characterWidth,
   prevValue,
   step,
@@ -101,6 +107,8 @@ export default function CharacterComponent({
       background={background}
       borderWidth={borderWidth}
       characterWidth={characterWidth}
+      borderRadius={borderRadius}
+      margin={margin}
     >
       <Panel position="top" background={background} textColor={textColor} value={value} />
       <Panel position="bottom" background={background} textColor={textColor} value={prevValue} />

@@ -1,12 +1,18 @@
 .wrapper {
   --border-color: #ddd;
+  --border-radius: 10px;  // Variable for border radius
   --border-width: 1px;
   --color: #ddd;
+  --font-family: Arial, sans-serif;  // Variable for font family
   --font-size: 1rem;
+  --padding: 10px;
 
   display: flex;
   color: var(--color);
   font-size: var(--font-size);
+  font-family: var(--font-family);  // Apply font family
+  padding: var(--padding);
+  border-radius: var(--border-radius) !important;  // Apply border radius
 
   > * {
     &:not(:first-child) {

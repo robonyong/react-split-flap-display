@@ -8,12 +8,15 @@ import * as css from './styles.module.scss';
 export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
   background?: string;
   borderColor?: string;
+  borderRadius?: string; // New property for border radius
   borderWidth?: string;
   characterSet: string[];
   characterWidth?: string;
+  fontFamily?: string; // New property for font family
   fontSize?: string;
   minLength?: number;
   padDirection?: string;
+  margin?: string; // New property for padding
   step?: number;
   textColor?: string;
   value: string;
@@ -23,12 +26,15 @@ export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
 const defaultProps = {
   background: '#000000',
   borderColor: '#dddddd',
+  borderRadius: '10px', // Default border radius
   borderWidth: '1px',
   characterSet: NUMERIC,
   characterWidth: '1rem',
+  fontFamily: 'Arial, sans-serif', // Default font family
   fontSize: '1rem',
   minLength: 5,
   padDirection: 'left',
+  margin: '5px', // Default padding
   step: 200,
   textColor: '#dddddd',
   value: '94609',
@@ -51,12 +57,15 @@ export default function SplitFlapDisplay({
   className,
   background = defaultProps.background,
   borderColor = defaultProps.borderColor,
+  borderRadius = defaultProps.borderRadius, // Use border radius from props
   borderWidth = defaultProps.borderWidth,
   characterSet = defaultProps.characterSet,
   characterWidth = defaultProps.characterWidth,
+  fontFamily = defaultProps.fontFamily, // Use font family from props
   fontSize = defaultProps.fontSize,
   minLength = defaultProps.minLength,
   padDirection = defaultProps.padDirection,
+  margin = defaultProps.margin, // Use padding from props
   step = defaultProps.step,
   textColor = defaultProps.textColor,
   value = defaultProps.value,
@@ -139,9 +148,12 @@ export default function SplitFlapDisplay({
       className={clsx(css.wrapper, className)}
       style={{
         '--border-color': borderColor,
+        '--border-radius': borderRadius, // Ensure units are correct
         '--border-width': borderWidth,
         '--color': textColor,
+        '--font-family': fontFamily,
         '--font-size': fontSize,
+        '--margin': margin, // Ensure units are correct
       }}
     >
       {prevChars.map((v: string, idx: number) => (
@@ -149,6 +161,8 @@ export default function SplitFlapDisplay({
           key={`split-flap-${idx}`}
           background={background}
           borderWidth={borderWidth}
+          borderRadius={borderRadius}
+          margin={margin}
           characterWidth={characterWidth}
           prevValue={v === ' ' ? '\u2007' : v}
           step={step}
