@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import Panel, { FlipPanel } from '../Panel';
 import defaultSound from '../assets/flip.mp3';
-
+// @ts-expect-error the minified file is not in the type declarations
+import { Howl } from 'howler/dist/howler.min.js';
 import * as css from './styles.module.scss';
 
 interface Props {
