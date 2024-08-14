@@ -3,3 +3,5 @@ node_modules
 dist
 .rpt2_cache
 .eslintcache
+
+*storybook.log
