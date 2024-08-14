@@ -9,7 +9,7 @@ import * as css from './styles.module.scss';
 
 interface Props {
   background: string;
-  borderWidth: string;
+  splitWidth: string;
   characterWidth: string | undefined;
   prevValue: string;
   step: number;
@@ -20,19 +20,19 @@ interface Props {
 
 interface StyleProps extends React.HTMLProps<HTMLDivElement> {
   background: string;
-  borderWidth: string;
+  splitWidth: string;
   characterWidth: string | undefined;
 }
 
 function Character(props: StyleProps) {
-  const { children, background, borderWidth, characterWidth, ...rest } = props;
+  const { children, background, splitWidth, characterWidth, ...rest } = props;
   return (
     <div
       {...rest}
       className={css.wrapper}
       style={{
         '--background': background,
-        '--border-width': borderWidth,
+        '--split-width': splitWidth,
         '--character-width': characterWidth,
       }}
     >
@@ -43,7 +43,7 @@ function Character(props: StyleProps) {
 
 export default function CharacterComponent({
   background,
-  borderWidth,
+  splitWidth,
   characterWidth,
   prevValue,
   step,
@@ -99,7 +99,7 @@ export default function CharacterComponent({
     <Character
       key={`${prevValue}-${value}`}
       background={background}
-      borderWidth={borderWidth}
+      splitWidth={splitWidth}
       characterWidth={characterWidth}
     >
       <Panel position="top" background={background} textColor={textColor} value={value} />

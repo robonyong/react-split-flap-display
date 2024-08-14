@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import SplitFlapCharacter from '../Character';
-import { NUMERIC } from '../constants';
 import * as css from './styles.module.scss';
 
 export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
@@ -11,9 +10,9 @@ export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
   borderWidth?: string;
   characterSet: string[];
   characterWidth?: string;
-  fontSize?: string;
   minLength?: number;
   padDirection?: string;
+  splitWidth?: string;
   step?: number;
   textColor?: string;
   value: string;
@@ -24,14 +23,12 @@ const defaultProps = {
   background: '#000000',
   borderColor: '#dddddd',
   borderWidth: '1px',
-  characterSet: NUMERIC,
-  characterWidth: '1rem',
-  fontSize: '1rem',
-  minLength: 5,
+  characterWidth: '1em',
+  minLength: 0,
   padDirection: 'left',
+  splitWidth: '1px',
   step: 200,
   textColor: '#dddddd',
-  value: '94609',
 };
 
 const escapeValue = (value: string, characterSet: string[]): string =>
@@ -52,14 +49,15 @@ export default function SplitFlapDisplay({
   background = defaultProps.background,
   borderColor = defaultProps.borderColor,
   borderWidth = defaultProps.borderWidth,
-  characterSet = defaultProps.characterSet,
+  characterSet,
   characterWidth = defaultProps.characterWidth,
-  fontSize = defaultProps.fontSize,
+  // fontSize = defaultProps.fontSize,
   minLength = defaultProps.minLength,
   padDirection = defaultProps.padDirection,
+  splitWidth = defaultProps.splitWidth,
   step = defaultProps.step,
   textColor = defaultProps.textColor,
-  value = defaultProps.value,
+  value,
   withSound,
   ...rest
 }: SplitFlapDisplayProps) {
@@ -141,14 +139,13 @@ export default function SplitFlapDisplay({
         '--border-color': borderColor,
         '--border-width': borderWidth,
         '--color': textColor,
-        '--font-size': fontSize,
       }}
     >
       {prevChars.map((v: string, idx: number) => (
         <SplitFlapCharacter
           key={`split-flap-${idx}`}
           background={background}
-          borderWidth={borderWidth}
+          splitWidth={splitWidth}
           characterWidth={characterWidth}
           prevValue={v === ' ' ? '\u2007' : v}
           step={step}

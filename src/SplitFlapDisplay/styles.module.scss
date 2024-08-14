@@ -2,16 +2,14 @@
   --border-color: #ddd;
   --border-width: 1px;
   --color: #ddd;
-  --font-size: 1rem;
 
   display: flex;
   color: var(--color);
-  font-size: var(--font-size);
+  box-sizing: border-box;
 
   > * {
     &:not(:first-child) {
       border-left: var(--border-color) var(--border-width) solid;
     }
   }
-  box-sizing: border-box;
 }

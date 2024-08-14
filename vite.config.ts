@@ -16,7 +16,9 @@ import pkg from './package.json' assert { type: 'json' };
 export default defineConfig({
   plugins: [
     react(),
-    sassDts(),
+    sassDts({
+      prettierFilePath: './.prettierrc',
+    }),
     dts({
       include: ['src'],
     }),
