@@ -10,24 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     name: ui-changes
     outputs:
-      all_changed_files: ${{ steps.ui-changes.outputs.all_changed_files }}
-      any_changed: ${{ steps.ui-changes.outputs.any_changed }}
+      any_modified: ${{ steps.ui-changes.outputs.any_modified }}
+      all_modified_files: ${{ steps.ui-changes.outputs.all_modified_files }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get changed files
-        id: changed-files
+        id: ui-changes
         uses: tj-actions/changed-files@v44
         with:
+          write_output_files: true
           files: |
             src/**
             !src/demo/**
             .storybook/**
+      - name: List all changed files
+        env:
+          ALL_MODIFIED_FILES: ${{ steps.ui-changes.outputs.all_modified_files }}
+          ANY_MODIFIED: ${{ steps.ui-changes.outputs.any_modified }}
+        run: |
+          echo "Found ${#ALL_MODIFIED_FILES[@]} changed UI file(s)"
+          for file in ${ALL_MODIFIED_FILES}; do
+            echo "$file"
+          done
 
   chromatic:
     name: Run Chromatic
     needs: [ui-changes]
-    if: ${{ needs.ui-changes.outputs.any_changed == 'true' }}
+    if: ${{ needs.ui-changes.outputs.any_modified == 'true' }}
     uses: ./.github/workflows/chromatic.yml
     secrets: inherit

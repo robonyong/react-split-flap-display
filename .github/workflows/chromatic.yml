@@ -15,15 +15,6 @@ jobs:
     name: Run Chromatic
     runs-on: ubuntu-latest
     steps:
-      - name: List all changed files
-        env:
-          ALL_CHANGED_FILES: ${{ steps.ui-changes.outputs.all_changed_files }}
-          ANY_CHANGED: ${{ steps.ui-changes.outputs.any_changed }}
-        run: |
-          echo "Found changed ${#ALL_CHANGED_FILES[@]} files"
-          for file in ${ALL_CHANGED_FILES}; do
-            echo "$file"
-          done
       - name: Checkout code
         uses: actions/checkout@v4
         with:
