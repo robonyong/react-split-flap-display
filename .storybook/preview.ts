@@ -10,6 +10,7 @@ const preview: Preview = {
       },
       sort: 'requiredFirst',
     },
+    chromatic: { diffThreshold: 0.1 },
   },
 };
 

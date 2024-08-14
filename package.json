@@ -17,15 +17,18 @@
     }
   },
   "description": "React component for Split Flap (Solari) display",
-  "author": "Robin Yang",
+  "author": {
+    "name": "Robin Yang"
+  },
   "homepage": "https://robonyong.github.io/react-split-flap-display",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:robonyong/react-split-flap-display.git"
+    "url": "git+ssh://git@github.com/robonyong/react-split-flap-display.git"
   },
   "types": "dist/index.d.ts",
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.6.1",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
@@ -46,6 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
+    "chromatic": "^11.7.0",
     "clsx": "^2.1.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.57.0",

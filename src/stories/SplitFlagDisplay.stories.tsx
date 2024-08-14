@@ -13,7 +13,9 @@ const meta: Meta<SplitFlapDisplayStoryProps> = {
   title: 'SplitFlapDisplay',
   component: SplitFlapDisplay,
   tags: ['autodocs'],
-  parameters: {},
+  parameters: {
+    chromatic: { delay: 15000 },
+  },
   args: {
     fontSize: '2em',
     fontFamily: 'monospace',
