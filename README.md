@@ -33,7 +33,6 @@ export default function Display() {
 | borderWidth    | string                      | '1px'     | Any valid CSS width value for the width of the border between characters                                                                                                                   |
 | characterSet   | Array of strings (required) | _null_    | The array of characters for the display to flip through                                                                                                                                    |
 | characterWidth | string                      | '1em'     | Any valid CSS width value for the width of each character. Useful with non-monospaced fonts                                                                                                |
-| fontSize       | string                      | '1em'     | Any valid CSS font-size value                                                                                                                                                              |
 | minLength      | number                      | 0         | Minimum # of characters in the display                                                                                                                                                     |
 | padDirection   | string                      | 'left'    | If minLength > number of characters currently displayed, append blank characters to left or right side                                                                                     |
 | splitWidth     | string                      | '1px'     | Any valid CSS width value for the width of the "axis" between the top and bottom of a character                                                                                            |
@@ -48,7 +47,7 @@ For `characterSet`, there are three convenience constants that ship with this co
 `ALPHA`: whitespace `' '` + `[A-Z]`\
 `PUNCTUATION`: the non-alphanumeric characters found in a [Vesta Board](https://www.vestaboard.com/ces/)
 
-This component inherits the font family from its parents. If you want to control the font specifically for this display, wrap it in a container with the `font-family` css property defined.
+This component inherits the font family and font size from its parents. If you want to control those properties specifically for this display, wrap it in a container or pass a `className` with those properties defined.
 
 ## License
 

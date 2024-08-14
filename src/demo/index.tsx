@@ -37,9 +37,12 @@ export default function Demo() {
   const [padDirection, setPadDirection] = useState<string>('left');
   const [value, setValue] = useState<string>(defaultInputs.numeric);
   const [textColor, setTextColor] = useState<string>('#dddddd');
+  const [splitWidth, setSplitWidth] = useState<string>('1px');
   const [step, setStep] = useState<number>(200);
   const [withSound, setWithSound] = useState<boolean | string>(false);
   const [withCustomSound, setWithCustomSound] = useState<string>('');
+
+  const [fontFamily, setFontFamily] = useState<string>("'Courier New', Courier, monospace");
 
   const generateInputHandler =
     (setFn: SetStateAction<any>) =>
@@ -82,20 +85,22 @@ export default function Demo() {
       <h3>React Split Flap Display</h3>
       <div className={css.flexContainerVertical}>
         <div className={css.wrapper}>
-          <SplitFlapDisplay
-            background={background}
-            borderColor={borderColor}
-            borderWidth={borderWidth}
-            characterSet={typeToCharSetArray[exampleSet]}
-            characterWidth={characterWidth}
-            fontSize={fontSize}
-            minLength={minLength}
-            padDirection={padDirection}
-            step={step}
-            textColor={textColor}
-            value={value}
-            withSound={withSound}
-          />
+          <div style={{ fontFamily, fontSize }}>
+            <SplitFlapDisplay
+              background={background}
+              borderColor={borderColor}
+              borderWidth={borderWidth}
+              characterSet={typeToCharSetArray[exampleSet]}
+              characterWidth={characterWidth}
+              minLength={minLength}
+              padDirection={padDirection}
+              splitWidth={splitWidth}
+              step={step}
+              textColor={textColor}
+              value={value}
+              withSound={withSound}
+            />
+          </div>
         </div>
         <div className={css.flexContainerHorizontal}>
           <div>
@@ -156,8 +161,8 @@ export default function Demo() {
                 </label>
               </div>
             </div>
-            <div className={css.wrapper}>
-              <div>
+            <div>
+              <div className={css.wrapper}>
                 background color:&nbsp;
                 <Swatch color={background} onChange={generateColorInputHandler(setBackground)} />
               </div>
@@ -172,12 +177,16 @@ export default function Demo() {
             </div>
             <div className={css.wrapper}>
               <div>
-                border width:&nbsp;
-                <input value={borderWidth} onChange={generateInputHandler(setBorderWidth)} />
+                <label>
+                  border width:&nbsp;
+                  <input value={borderWidth} onChange={generateInputHandler(setBorderWidth)} />
+                </label>
               </div>
               <div>
-                font size:&nbsp;
-                <input value={fontSize} onChange={generateInputHandler(setFontSize)} />
+                <label>
+                  split width:&nbsp;
+                  <input value={splitWidth} onChange={generateInputHandler(setSplitWidth)} />
+                </label>
               </div>
             </div>
             <div className={css.wrapper}>
@@ -207,6 +216,21 @@ export default function Demo() {
                 {typeof withSound === 'string' && <input value={withCustomSound} onChange={onCustomSoundInput} />}
               </div>
             </div>
+            <div className={css.wrapper}>
+              <div>
+                <strong>Inherited from parent</strong>
+              </div>
+              <div>
+                <label>
+                  font family:&nbsp;
+                  <input value={fontFamily} onChange={generateInputHandler(setFontFamily)} />
+                </label>
+              </div>
+              <div>
+                font size:&nbsp;
+                <input value={fontSize} onChange={generateInputHandler(setFontSize)} />
+              </div>
+            </div>
           </div>
           <CodeBlock
             background={background}
@@ -214,9 +238,11 @@ export default function Demo() {
             borderWidth={borderWidth}
             characterSet={typeToCharSet[exampleSet]}
             characterWidth={characterWidth}
+            fontFamily={fontFamily}
             fontSize={fontSize}
             minLength={minLength}
             padDirection={padDirection}
+            splitWidth={splitWidth}
             step={step}
             textColor={textColor}
             value={value}

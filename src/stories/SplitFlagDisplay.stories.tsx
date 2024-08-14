@@ -4,7 +4,10 @@ import React from 'react';
 import SplitFlapDisplay from '../SplitFlapDisplay';
 import { ALPHA, NUMERIC, PUNCTUATION } from '../constants';
 
-type SplitFlapDisplayStoryProps = React.ComponentProps<typeof SplitFlapDisplay> & { fontFamily?: string };
+type SplitFlapDisplayStoryProps = React.ComponentProps<typeof SplitFlapDisplay> & {
+  fontFamily?: string;
+  fontSize?: string;
+};
 
 const meta: Meta<SplitFlapDisplayStoryProps> = {
   title: 'SplitFlapDisplay',
@@ -13,7 +16,6 @@ const meta: Meta<SplitFlapDisplayStoryProps> = {
   parameters: {},
   args: {
     fontSize: '2em',
-    characterWidth: '1em',
     fontFamily: 'monospace',
   },
   argTypes: {
@@ -24,12 +26,16 @@ const meta: Meta<SplitFlapDisplayStoryProps> = {
       description:
         "This is a storybook-only prop, to be passed to the component's parent and inherited by SplitFlagDisplay",
     },
+    fontSize: {
+      description:
+        "This is a storybook-only prop, to be passed to the component's parent and inherited by SplitFlagDisplay",
+    },
     value: {
       required: true,
     },
   },
-  render: ({ fontFamily, ...args }) => (
-    <div style={{ fontFamily: fontFamily ?? 'monospace' }}>
+  render: ({ fontFamily, fontSize, ...args }) => (
+    <div style={{ fontFamily: fontFamily ?? 'monospace', fontSize: fontSize ?? '2em' }}>
       <SplitFlapDisplay {...args} />
     </div>
   ),

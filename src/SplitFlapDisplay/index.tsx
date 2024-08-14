@@ -10,7 +10,6 @@ export interface SplitFlapDisplayProps extends React.HTMLProps<HTMLDivElement> {
   borderWidth?: string;
   characterSet: string[];
   characterWidth?: string;
-  fontSize?: string;
   minLength?: number;
   padDirection?: string;
   splitWidth?: string;
@@ -25,7 +24,6 @@ const defaultProps = {
   borderColor: '#dddddd',
   borderWidth: '1px',
   characterWidth: '1em',
-  fontSize: '1em',
   minLength: 0,
   padDirection: 'left',
   splitWidth: '1px',
@@ -53,7 +51,7 @@ export default function SplitFlapDisplay({
   borderWidth = defaultProps.borderWidth,
   characterSet,
   characterWidth = defaultProps.characterWidth,
-  fontSize = defaultProps.fontSize,
+  // fontSize = defaultProps.fontSize,
   minLength = defaultProps.minLength,
   padDirection = defaultProps.padDirection,
   splitWidth = defaultProps.splitWidth,
@@ -141,7 +139,6 @@ export default function SplitFlapDisplay({
         '--border-color': borderColor,
         '--border-width': borderWidth,
         '--color': textColor,
-        '--font-size': fontSize,
       }}
     >
       {prevChars.map((v: string, idx: number) => (

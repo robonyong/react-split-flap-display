@@ -6,9 +6,11 @@ type CodeBlockProps = {
   borderWidth: string;
   characterSet: string;
   characterWidth: string;
+  fontFamily: string;
   fontSize: string;
   minLength: number;
   padDirection: string;
+  splitWidth: string;
   step: number;
   textColor: string;
   value: string;
@@ -21,9 +23,11 @@ export default function CodeBlock({
   borderWidth,
   characterSet,
   characterWidth,
+  fontFamily,
   fontSize,
   minLength,
   padDirection,
+  splitWidth,
   step,
   textColor,
   value,
@@ -32,20 +36,25 @@ export default function CodeBlock({
   return (
     <pre>
       {`
-  <SplitFlapDisplay
-    background='${background}'
-    borderColor='${borderColor}'
-    borderWidth='${borderWidth}'
-    characterSet={${characterSet}}
-    characterWidth='${characterWidth}'
-    fontSize='${fontSize}'
-    minLength={${minLength}}
-    padDirection='${padDirection}'
-    step={${step}}
-    textColor='${textColor}'
-    value='${value}'
-    withSound={${withSound}}
-  />
+  <div style={{
+    fontFamily: "${fontFamily}",
+    fontSize: "${fontSize}"
+  }}>
+    <SplitFlapDisplay
+      background='${background}'
+      borderColor='${borderColor}'
+      borderWidth='${borderWidth}'
+      characterSet={${characterSet}}
+      characterWidth='${characterWidth}'
+      minLength={${minLength}}
+      padDirection='${padDirection}'
+      splitWidth='${splitWidth}'
+      step={${step}}
+      textColor='${textColor}'
+      value='${value}'
+      withSound={${withSound}}
+    />
+  </div>
   `}
     </pre>
   );

@@ -2,11 +2,9 @@
   --border-color: #ddd;
   --border-width: 1px;
   --color: #ddd;
-  --font-size: 1em;
 
   display: flex;
   color: var(--color);
-  font-size: var(--font-size);
   box-sizing: border-box;
 
   > * {
