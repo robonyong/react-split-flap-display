@@ -7,6 +7,8 @@
   color: var(--color);
   box-sizing: border-box;
 
+  border-radius: 10px;
+
   > * {
     &:not(:first-child) {
       border-left: var(--border-color) var(--border-width) solid;
