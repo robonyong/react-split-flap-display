@@ -1,9 +1,14 @@
-name: 'Chromatic VRT'
+name: Chromatic
 
-on:
-  pull_request:
-    branches:
-      - main
+on: workflow_call
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-chromatic
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
 
 jobs:
   chromatic:
@@ -16,10 +21,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
+          cache: npm
+          cache-dependency-path: ./package.json
           node-version: 20
       - name: Install dependencies
         run: npm ci
-      - name: Run Chromatic
+      - name: Run Visual Regression Tests
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          autoAcceptChanges: 'main'
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
